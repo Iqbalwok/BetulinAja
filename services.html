@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="BetulinAja — Platform marketplace jasa service dan perbaikan rumah terpercaya. Semua Masalah Rumah, BetulinAja!">
+  <meta name="theme-color" content="#2563EB">
+  <title>Katalog Layanan Service — BetulinAja</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Core App CSS -->
+  <link rel="stylesheet" href="publicpublic/assets/css/app.css">
+
+    <link rel="stylesheet" href="publicpublic/assets/css/customer.css">
+</head>
+<body>
+
+  <!-- Main Yield -->
+    <!-- Customer Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-customer sticky-top shadow-sm py-2">
+  <div class="container d-flex align-items-center justify-content-between">
+    <!-- Brand Logo -->
+    <a class="navbar-brand navbar-brand-logo py-0 me-3" href="index.html">
+      <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1 shadow-sm" style="width: 32px; height: 32px;">
+        <i class="bi bi-tools fs-6"></i>
+      </div>
+      <span>Betulin<span class="brand-highlight">Aja</span></span>
+    </a>
+
+    <!-- Desktop Nav Links (Clean & Ringkas) -->
+    <div class="d-none d-lg-flex align-items-center gap-1 mx-auto">
+      <a class="nav-link nav-link-custom px-3 py-2 active fw-semibold" href="index.html">
+        Beranda
+      </a>
+      <a class="nav-link nav-link-custom px-3 py-2 " href="services.html">
+        Layanan
+      </a>
+      <a class="nav-link nav-link-custom px-3 py-2 " href="technicians.html">
+        Teknisi
+      </a>
+      <a class="nav-link nav-link-custom px-3 py-2 " href="estimate.html">
+        Simulasi Biaya
+      </a>
+    </div>
+
+    <!-- Right Controls: Pesanan, Pesan Jasa & Toggle Menu Samping -->
+    <div class="d-flex align-items-center gap-2">
+      <!-- Pesanan Saya (Desktop) -->
+      <a href="order-history.html" class="btn btn-outline-custom btn-sm px-3 py-2 d-none d-sm-inline-flex align-items-center gap-1" style="font-size: 0.875rem;">
+        <i class="bi bi-receipt"></i>
+        <span>Pesanan Saya</span>
+      </a>
+
+      <!-- Tombol CTA Pesan Jasa -->
+      <a href="booking.html" class="btn btn-primary-custom btn-sm px-3 py-2 d-inline-flex align-items-center gap-1 shadow-sm fw-semibold" style="font-size: 0.875rem;">
+        <i class="bi bi-plus-circle"></i>
+        <span>Pesan Jasa</span>
+      </a>
+
+      <!-- Tombol Menu Samping (Desktop & Mobile) -->
+      <button class="btn btn-outline-custom p-2 d-inline-flex align-items-center justify-content-center touch-target ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenuSamping" aria-controls="sidebarMenuSamping" title="Buka Menu Samping">
+        <i class="bi bi-list fs-5 text-dark"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ==============================================================
+     OFFCANVAS MENU SAMPING (SIDEBAR DRAWER)
+     ============================================================== -->
+<div class="offcanvas offcanvas-end shadow-lg" tabindex="-1" id="sidebarMenuSamping" aria-labelledby="sidebarMenuSampingLabel" style="width: 320px; max-width: 85vw; border-left: 1px solid #e2e8f0;">
+  <!-- Offcanvas Header -->
+  <div class="offcanvas-header bg-light border-bottom py-3">
+    <div class="d-flex align-items-center gap-2" id="sidebarMenuSampingLabel">
+      <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1" style="width: 30px; height: 30px;">
+        <i class="bi bi-tools small"></i>
+      </div>
+      <div>
+        <h6 class="fw-bold mb-0 text-dark">Betulin<span class="text-primary">Aja</span></h6>
+        <span class="text-secondary" style="font-size: 0.72rem;">Menu & Layanan Lengkap</span>
+      </div>
+    </div>
+    <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <!-- Offcanvas Body -->
+  <div class="offcanvas-body p-0 d-flex flex-column justify-content-between">
+    <div class="p-3">
+      <!-- Call to Action Card -->
+      <div class="bg-soft-primary p-3 rounded-3 mb-3 border border-primary-subtle">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="badge-soft-success py-1 px-2 small">Teknisi Siaga</span>
+          <span class="text-muted small"><i class="bi bi-clock me-1"></i>07.00 - 21.00</span>
+        </div>
+        <h6 class="fw-bold text-dark mb-1">Ada Kerusakan di Rumah?</h6>
+        <p class="text-secondary small mb-2">Teknisi profesional siap meluncur ke lokasi Anda.</p>
+        <a href="booking.html" class="btn btn-primary-custom btn-sm w-100 fw-semibold">
+          <i class="bi bi-plus-circle me-1"></i> Pesan Jasa Sekarang
+        </a>
+      </div>
+
+      <!-- Menu Section: Navigasi Pelanggan -->
+      <div class="mb-3">
+        <div class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.7rem; letter-spacing: 0.05em;">Menu Utama</div>
+        <div class="list-group list-group-flush border-0">
+          <a href="index.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 bg-light text-primary fw-semibold">
+            <i class="bi bi-house-door text-primary fs-6"></i>
+            <span>Beranda</span>
+          </a>
+          <a href="services.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-grid text-primary fs-6"></i>
+            <span>Katalog Layanan</span>
+          </a>
+          <a href="order-history.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-clock-history text-primary fs-6"></i>
+            <span>Riwayat Pesanan</span>
+          </a>
+          <a href="tracking.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-geo-alt text-primary fs-6"></i>
+            <span>Live Tracking Teknisi</span>
+          </a>
+          <a href="technicians.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-people text-primary fs-6"></i>
+            <span>Direktori Teknisi</span>
+          </a>
+          <a href="estimate.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-calculator text-primary fs-6"></i>
+            <span>Simulasi Biaya Service</span>
+          </a>
+          <a href="location.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-map text-primary fs-6"></i>
+            <span>Cek Jangkauan Wilayah</span>
+          </a>
+          <a href="profile.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+            <i class="bi bi-person-circle text-primary fs-6"></i>
+            <span>Profil Pengguna</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Menu Section: Portal Mitra & Admin -->
+      <div class="mb-3">
+        <div class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.7rem; letter-spacing: 0.05em;">Akses Portal Khusus</div>
+        <div class="d-flex flex-column gap-2">
+          <a href="partner-dashboard.html" class="text-decoration-none p-2 rounded-2 border bg-light d-flex align-items-center justify-content-between hover-card">
+            <div class="d-flex align-items-center gap-2">
+              <div class="bg-success text-white rounded p-1 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                <i class="bi bi-tools small"></i>
+              </div>
+              <div>
+                <span class="d-block fw-semibold text-dark small">Portal Mitra Teknisi</span>
+                <span class="d-block text-muted" style="font-size: 0.72rem;">Pesanan, Pengerjaan & Saldo</span>
+              </div>
+            </div>
+            <i class="bi bi-chevron-right text-muted small"></i>
+          </a>
+
+          <a href="admin-dashboard.html" class="text-decoration-none p-2 rounded-2 border bg-light d-flex align-items-center justify-content-between hover-card">
+            <div class="d-flex align-items-center gap-2">
+              <div class="bg-danger text-white rounded p-1 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                <i class="bi bi-shield-lock small"></i>
+              </div>
+              <div>
+                <span class="d-block fw-semibold text-dark small">Portal Administrator</span>
+                <span class="d-block text-muted" style="font-size: 0.72rem;">Monitoring, Verifikasi & Tarif</span>
+              </div>
+            </div>
+            <i class="bi bi-chevron-right text-muted small"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offcanvas Footer: Creator Info -->
+    <div class="p-3 bg-light border-top mt-auto">
+      <div class="mb-2">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle small mb-1">
+          <i class="bi bi-mortarboard me-1"></i> Univ. Insan Pembangunan Indonesia
+        </span>
+        <div class="small fw-semibold text-dark">Tim Pengembang:</div>
+        <div class="text-secondary" style="font-size: 0.75rem; line-height: 1.5;">
+          &bull; <strong>Maulana Rizki</strong> (Penemu)<br>
+          &bull; <strong>Iqbal Adityajaya</strong> (Pembuat & Pengembang)<br>
+          &bull; <strong>Sapriadi Sandy</strong> (CEO)
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2 pt-2 border-top">
+        <i class="bi bi-whatsapp text-success fs-5"></i>
+        <div>
+          <span class="d-block fw-semibold text-dark" style="font-size: 0.75rem;">Kontak WhatsApp:</span>
+          <a href="https://wa.me/6285714310516" target="_blank" class="text-decoration-none text-success small fw-bold">
+            085714310516
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Main Customer Content -->
+  <main class="flex-grow-1">
+    <div class="bg-light py-4 border-bottom">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2 small">
+        <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-secondary">Beranda</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Layanan</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
+      <div>
+        <h2 class="fw-bold text-dark mb-1">Daftar Lengkap Layanan Service</h2>
+        <p class="text-secondary small mb-0">Temukan solusi tepat untuk segala perbaikan perlengkapan rumah Anda.</p>
+      </div>
+      <a href="booking.html" class="btn btn-primary-custom text-nowrap">
+        <i class="bi bi-calendar-plus me-1"></i> Buat Pesanan Baru
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+  <!-- Search & Category Filters -->
+  <div class="row g-3 mb-4 align-items-center">
+    <div class="col-md-5">
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+        <input type="text" id="service-search-input" class="form-control border-start-0" placeholder="Ketik jenis perbaikan (contoh: Freon, MCB, Pompa)...">
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="d-flex gap-2 overflow-x-auto pb-2 pb-md-0" id="service-filter-pills">
+        <button type="button" class="btn btn-sm btn-primary-custom filter-pill active" data-category="all">Semua</button>
+        <button type="button" class="btn btn-sm btn-outline-custom filter-pill" data-category="ac">Service AC</button>
+        <button type="button" class="btn btn-sm btn-outline-custom filter-pill" data-category="elektronik">Elektronik</button>
+        <button type="button" class="btn btn-sm btn-outline-custom filter-pill" data-category="listrik">Listrik</button>
+        <button type="button" class="btn btn-sm btn-outline-custom filter-pill" data-category="plumbing">Plumbing</button>
+        <button type="button" class="btn btn-sm btn-outline-custom filter-pill" data-category="kulkas">Kulkas</button>
+        <button type="button" class="btn btn-sm btn-outline-custom filter-pill" data-category="komputer">Komputer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Grid -->
+  <div class="row g-4" id="services-grid-container">
+    <!-- Service AC -->
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="ac">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-snow"></i>
+      </div>
+              <span class="badge-soft-primary small">Populer</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Cuci AC Standar (0.5 - 1 PK)</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Pembersihan unit indoor, filter debu, evaporator, baling-baling blower, serta drainase pembuangan air.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp100.000</span>
+    </div>
+    <a href="booking.html?cat=Service+AC&amp;srv=Cuci+AC+Standar+%280.5+-+1+PK%29" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="ac">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-snow2"></i>
+      </div>
+              <span class="badge-soft-secondary small">Service AC</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Isi / Tambah Freon R32 &amp; R410</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Pemeriksaan tekanan manifold gauge, penambahan freon ramah lingkungan, dan uji kebocoran nepel pipa.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp175.000</span>
+    </div>
+    <a href="booking.html?cat=Service+AC&amp;srv=Isi+%2F+Tambah+Freon+R32+%26+R410" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="ac">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-arrow-left-right"></i>
+      </div>
+              <span class="badge-soft-secondary small">Service AC</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Bongkar Pasang AC Split</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Pencopotan unit lama, pemindahan jalur pipa tembaga, pemasangan bracket, dan vakum sistem pipa.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp250.000</span>
+    </div>
+    <a href="booking.html?cat=Service+AC&amp;srv=Bongkar+Pasang+AC+Split" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <!-- Elektronik -->
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="elektronik">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-tv"></i>
+      </div>
+              <span class="badge-soft-secondary small">Elektronik</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Service TV LED / Smart TV</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Pengecekan modul power supply, backlight mati, layar bergaris, motherboard dan penggantian elco/kapasitor.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp150.000</span>
+    </div>
+    <a href="booking.html?cat=Elektronik&amp;srv=Service+TV+LED+%2F+Smart+TV" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="elektronik">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-circle-square"></i>
+      </div>
+              <span class="badge-soft-secondary small">Elektronik</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Perbaikan Mesin Cuci</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Penanganan dinamo motor macet, air tidak mau keluar/mengisi, pulsator tidak berputar, dan modul eror.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp130.000</span>
+    </div>
+    <a href="booking.html?cat=Elektronik&amp;srv=Perbaikan+Mesin+Cuci" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="elektronik">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-motherboard"></i>
+      </div>
+              <span class="badge-soft-secondary small">Elektronik</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Service Microwave &amp; Oven Listrik</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Perbaikan magnetron tidak memanaskan makanan, saklar pintu error, piring putar macet, dan sekring putus.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp110.000</span>
+    </div>
+    <a href="booking.html?cat=Elektronik&amp;srv=Service+Microwave+%26+Oven+Listrik" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <!-- Listrik -->
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="listrik">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-lightning-charge"></i>
+      </div>
+              <span class="badge-soft-primary small">Prioritas Keamanan</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Perbaikan Korsleting / MCB Sering Turun</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Tracing jalur kabel yang bergesekan, penggantian MCB kelebihan beban, dan pembersihan instalasi grounding.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp125.000</span>
+    </div>
+    <a href="booking.html?cat=Listrik&amp;srv=Perbaikan+Korsleting+%2F+MCB+Sering+Turun" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="listrik">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-toggle-on"></i>
+      </div>
+              <span class="badge-soft-secondary small">Listrik</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Pemasangan Stop Kontak &amp; Saklar</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Penambahan titik stop kontak baru, saklar hotel (dua arah), dan perapian kabel jalur luar dinding.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp75.000</span>
+    </div>
+    <a href="booking.html?cat=Listrik&amp;srv=Pemasangan+Stop+Kontak+%26+Saklar" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <!-- Plumbing -->
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="plumbing">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-droplet-half"></i>
+      </div>
+              <span class="badge-soft-primary small">Bergaransi</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Pelancaran Saluran Air Mampet</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Penanganan pipa bak cuci piring mampet lemak, floor drain kamar mandi tersumbat tanpa bongkar lantai.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp120.000</span>
+    </div>
+    <a href="booking.html?cat=Plumbing&amp;srv=Pelancaran+Saluran+Air+Mampet" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="plumbing">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-water"></i>
+      </div>
+              <span class="badge-soft-secondary small">Plumbing</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Service Pompa Air &amp; Jet Pump</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Perbaikan otomatis pompa mendadak cetak-cetek, impeller aus, ganti seal mechanical, dan pancingan angin.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp160.000</span>
+    </div>
+    <a href="booking.html?cat=Plumbing&amp;srv=Service+Pompa+Air+%26+Jet+Pump" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <!-- Kulkas -->
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="kulkas">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-box-seam"></i>
+      </div>
+              <span class="badge-soft-secondary small">Kulkas</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Service Kulkas 1 / 2 Pintu Tidak Dingin</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Pengecekan timer defrost, bimetal heater, kipas evaporator, dan pembersihan kisi-kisi kondensor.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp140.000</span>
+    </div>
+    <a href="booking.html?cat=Kulkas&amp;srv=Service+Kulkas+1+%2F+2+Pintu+Tidak+Dingin" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <!-- Komputer -->
+    <div class="col-md-6 col-lg-4 service-grid-item" data-cat="komputer">
+      <div class="card card-custom card-hover h-100 p-4 d-flex flex-column justify-content-between">
+  <div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="category-icon-box m-0">
+        <i class="bi bi-laptop"></i>
+      </div>
+              <span class="badge-soft-secondary small">Komputer</span>
+          </div>
+
+    <h5 class="fw-bold text-dark mb-2">Pembersihan Thermal Paste &amp; Fan Laptop</h5>
+    <p class="text-secondary small mb-3" style="line-height: 1.5;">
+      Pembersihan debu heatsink pendingin, ganti thermal paste premium (Artic MX-4), agar suhu tidak overheat.
+    </p>
+  </div>
+
+  <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-auto">
+    <div>
+      <span class="text-muted small d-block" style="font-size: 0.75rem;">Mulai dari</span>
+      <span class="fw-bold text-primary fs-6">Rp90.000</span>
+    </div>
+    <a href="booking.html?cat=Komputer&amp;srv=Pembersihan+Thermal+Paste+%26+Fan+Laptop" class="btn btn-soft-primary btn-sm px-3 py-2">
+      Pesan <i class="bi bi-chevron-right ms-1"></i>
+    </a>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- Customer Footer -->
+  <footer class="bg-white border-top mt-auto pt-5 pb-4">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <!-- Col 1: Brand & Tagline -->
+      <div class="col-lg-4 col-md-6">
+        <a class="navbar-brand-logo mb-3 d-inline-block" href="index.html">
+          <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1 me-1" style="width: 32px; height: 32px;">
+            <i class="bi bi-tools fs-6"></i>
+          </div>
+          <span>Betulin<span class="brand-highlight">Aja</span></span>
+        </a>
+        <p class="text-secondary mb-3" style="font-size: 0.95rem; line-height: 1.6;">
+          <strong>"Semua Masalah Rumah, BetulinAja!"</strong><br>
+          Platform marketplace jasa service dan perbaikan rumah terpercaya. Kami menghubungkan Anda dengan mitra teknisi profesional berstandar tinggi secara transparan, aman, dan mudah.
+        </p>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge-soft-success py-1 px-3 small d-inline-flex align-items-center gap-1">
+            <i class="bi bi-shield-check"></i> 100% Teknisi Terverifikasi
+          </span>
+          <span class="badge-soft-primary py-1 px-3 small d-inline-flex align-items-center gap-1">
+            <i class="bi bi-star-fill text-warning"></i> Rating 4.9/5.0
+          </span>
+        </div>
+      </div>
+
+      <!-- Col 2: Kategori Layanan -->
+      <div class="col-lg-2 col-md-6 col-6">
+        <h6 class="fw-bold text-dark mb-3">Layanan Populer</h6>
+        <ul class="list-unstyled d-flex flex-direction-column flex-column gap-2 mb-0" style="font-size: 0.9rem;">
+          <li><a href="services.html?cat=ac" class="text-secondary text-decoration-none hover-primary">Service AC & Pendingin</a></li>
+          <li><a href="services.html?cat=elektronik" class="text-secondary text-decoration-none">Perbaikan Elektronik</a></li>
+          <li><a href="services.html?cat=listrik" class="text-secondary text-decoration-none">Instalasi & Listrik</a></li>
+          <li><a href="services.html?cat=plumbing" class="text-secondary text-decoration-none">Plumbing & Pipa</a></li>
+          <li><a href="services.html?cat=kulkas" class="text-secondary text-decoration-none">Service Kulkas & Freezer</a></li>
+          <li><a href="services.html?cat=komputer" class="text-secondary text-decoration-none">Komputer & Laptop</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Navigasi Cepat -->
+      <div class="col-lg-3 col-md-6 col-6">
+        <h6 class="fw-bold text-dark mb-3">Akses Platform</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2 mb-0" style="font-size: 0.9rem;">
+          <li><a href="booking.html" class="text-secondary text-decoration-none">Form Pemesanan Jasa</a></li>
+          <li><a href="estimate.html" class="text-secondary text-decoration-none">Simulasi Estimasi Biaya</a></li>
+          <li><a href="tracking.html" class="text-secondary text-decoration-none">Live Tracking Pesanan</a></li>
+          <li><a href="partner-dashboard.html" class="text-secondary text-decoration-none text-success fw-medium"><i class="bi bi-arrow-right-short"></i> Portal Mitra Teknisi</a></li>
+          <li><a href="admin-dashboard.html" class="text-secondary text-decoration-none text-primary fw-medium"><i class="bi bi-arrow-right-short"></i> Portal Admin Sistem</a></li>
+          <li><a href="index.html/partner/login" class="text-secondary text-decoration-none">Daftar Jadi Mitra Teknisi</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Kontak & Jam Layanan -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="fw-bold text-dark mb-3">Pusat Bantuan & Kontak</h6>
+        <div class="d-flex flex-column gap-2 text-secondary" style="font-size: 0.9rem;">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp text-success fs-5"></i>
+            <span>+62 857-1431-0516 (Iqbal Aditya)</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-envelope text-primary fs-5"></i>
+            <span>bantuan@betulinaja.id</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-geo-alt text-danger fs-5"></i>
+            <span>Gedung Graha Betulin, Jl. Sudirman Kav. 21, Jakarta</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 mt-1">
+            <i class="bi bi-clock text-secondary fs-5"></i>
+            <span>Layanan Siaga: 07.00 - 21.00 WIB (Setiap Hari)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright & Team Credits -->
+    <div class="pt-4 border-top d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3 text-secondary" style="font-size: 0.85rem;">
+      <div>
+        &copy; 2026 <strong>BetulinAja Inc.</strong> &bull; Karya Mahasiswa <strong>Universitas Insan Pembangunan Indonesia (UNIPI)</strong>.
+      </div>
+      <div class="text-center text-lg-end text-muted">
+        <span>Tim Pengembang: </span>
+        <strong class="text-dark">Iqbal Adityajaya</strong> (Pembuat & Pengembang), 
+        <strong class="text-dark">Maulana Rizki</strong> (Penemu), 
+        <strong class="text-dark">Sapriadi Sandy</strong> (CEO)
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Global App JS -->
+  <script src="publicpublic/assets/js/app.js"></script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const pills = document.querySelectorAll('.filter-pill');
+  const items = document.querySelectorAll('.service-grid-item');
+  const searchInput = document.getElementById('service-search-input');
+
+  // Handle URL param filter if present
+  const urlParams = new URLSearchParams(window.location.search);
+  const catParam = urlParams.get('cat');
+  if (catParam) {
+    pills.forEach(p => {
+      if (p.dataset.category.toLowerCase() === catParam.toLowerCase()) {
+        p.click();
+      }
+    });
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', function() {
+      pills.forEach(p => {
+        p.classList.remove('btn-primary-custom', 'active');
+        p.classList.add('btn-outline-custom');
+      });
+      this.classList.add('btn-primary-custom', 'active');
+      this.classList.remove('btn-outline-custom');
+
+      const cat = this.dataset.category;
+      items.forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('keyup', function() {
+      const q = this.value.toLowerCase();
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  }
+});
+</script>
+  <script src="publicpublic/assets/js/customer.js"></script>
+</body>
+</html>

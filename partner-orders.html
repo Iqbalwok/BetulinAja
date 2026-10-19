@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="BetulinAja — Platform marketplace jasa service dan perbaikan rumah terpercaya. Semua Masalah Rumah, BetulinAja!">
+  <meta name="theme-color" content="#2563EB">
+  <title>Daftar Pesanan Masuk — Mitra BetulinAja</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Core App CSS -->
+  <link rel="stylesheet" href="publicpublic/assets/css/app.css">
+
+    <link rel="stylesheet" href="publicpublic/assets/css/partner.css">
+</head>
+<body>
+
+  <!-- Main Yield -->
+  <div class="partner-wrapper">
+
+  <!-- Desktop Sidebar -->
+  <aside class="partner-sidebar d-none d-lg-flex">
+    <div class="partner-sidebar-brand d-flex align-items-center justify-content-between">
+      <a class="navbar-brand-logo" href="partner-dashboard.html" style="font-size: 1.25rem;">
+        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1 me-1" style="width: 28px; height: 28px;">
+          <i class="bi bi-tools fs-6"></i>
+        </div>
+        <span>Betulin<span class="brand-highlight">Aja</span></span>
+      </a>
+      <span class="badge-soft-success small py-1 px-2" style="font-size: 0.7rem;">Mitra</span>
+    </div>
+
+    <!-- Partner Profile Snippet -->
+    <div class="p-3 border-bottom bg-light">
+      <div class="d-flex align-items-center gap-3">
+        <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?w=120&auto=format&fit=crop&q=80" alt="Budi Santoso" class="rounded-circle object-fit-cover shadow-sm" style="width: 44px; height: 44px;">
+        <div class="overflow-hidden">
+          <h6 class="fw-bold text-dark mb-0 fs-6 text-truncate">Budi Santoso</h6>
+          <span class="text-secondary small d-block" style="font-size: 0.75rem;">Teknisi AC & Pendingin</span>
+          <div class="d-flex align-items-center gap-1 text-warning small" style="font-size: 0.75rem;">
+            <i class="bi bi-star-fill"></i> 4.9 <span class="text-muted">(142)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="partner-nav">
+      <a href="partner-dashboard.html" class="partner-nav-link ">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="partner-orders.html" class="partner-nav-link ">
+        <i class="bi bi-inbox"></i>
+        <span>Pesanan Masuk</span>
+        <span class="badge bg-danger rounded-pill ms-auto px-2" style="font-size: 0.7rem;">3 Baru</span>
+      </a>
+      <a href="partner-active-job.html" class="partner-nav-link ">
+        <i class="bi bi-play-circle"></i>
+        <span>Pekerjaan Aktif</span>
+        <span class="badge bg-warning text-dark rounded-pill ms-auto px-2" style="font-size: 0.7rem;">1 Aktif</span>
+      </a>
+      <a href="index.html/partner/earnings" class="partner-nav-link ">
+        <i class="bi bi-wallet2"></i>
+        <span>Pendapatan</span>
+      </a>
+      <a href="index.html/partner/profile" class="partner-nav-link ">
+        <i class="bi bi-person-gear"></i>
+        <span>Profil & Keahlian</span>
+      </a>
+      <hr class="my-2 border-secondary-subtle">
+      <a href="index.html" class="partner-nav-link text-secondary">
+        <i class="bi bi-arrow-left"></i>
+        <span>Lihat Website Utama</span>
+      </a>
+    </nav>
+
+    <!-- Logout Snippet -->
+    <div class="p-3 border-top mt-auto">
+      <a href="index.html/partner/login" class="btn btn-outline-custom w-100 btn-sm text-danger">
+        <i class="bi bi-box-arrow-right me-1"></i> Keluar Akun
+      </a>
+    </div>
+  </aside>
+
+  <!-- Mobile Offcanvas Sidebar -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="partnerOffcanvas" aria-labelledby="partnerOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <div class="navbar-brand-logo" id="partnerOffcanvasLabel" style="font-size: 1.2rem;">
+        <span>Betulin<span class="brand-highlight">Aja</span> Mitra</span>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0 d-flex flex-column">
+      <div class="p-3 bg-light border-bottom">
+        <div class="d-flex align-items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?w=120&auto=format&fit=crop&q=80" alt="Budi Santoso" class="rounded-circle object-fit-cover" style="width: 44px; height: 44px;">
+          <div>
+            <h6 class="fw-bold text-dark mb-0">Budi Santoso</h6>
+            <small class="text-secondary">Teknisi AC & Pendingin</small>
+          </div>
+        </div>
+      </div>
+      <nav class="partner-nav">
+        <a href="partner-dashboard.html" class="partner-nav-link ">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="partner-orders.html" class="partner-nav-link ">
+          <i class="bi bi-inbox"></i>
+          <span>Pesanan Masuk</span>
+        </a>
+        <a href="partner-active-job.html" class="partner-nav-link ">
+          <i class="bi bi-play-circle"></i>
+          <span>Pekerjaan Aktif</span>
+        </a>
+        <a href="index.html/partner/earnings" class="partner-nav-link ">
+          <i class="bi bi-wallet2"></i>
+          <span>Pendapatan</span>
+        </a>
+        <a href="index.html/partner/profile" class="partner-nav-link ">
+          <i class="bi bi-person-gear"></i>
+          <span>Profil & Keahlian</span>
+        </a>
+        <hr class="my-2 border-secondary-subtle">
+        <a href="index.html" class="partner-nav-link">
+          <i class="bi bi-arrow-left"></i>
+          <span>Website Utama</span>
+        </a>
+      </nav>
+      <div class="p-3 border-top mt-auto">
+        <a href="index.html/partner/login" class="btn btn-outline-danger w-100 btn-sm">
+          <i class="bi bi-box-arrow-right me-1"></i> Keluar
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Work Area -->
+  <div class="partner-main">
+    <!-- Topbar -->
+    <header class="partner-topbar">
+      <div class="d-flex align-items-center gap-3">
+        <!-- Offcanvas button on mobile -->
+        <button class="btn btn-outline-custom p-2 d-lg-none touch-target" type="button" data-bs-toggle="offcanvas" data-bs-target="#partnerOffcanvas" aria-controls="partnerOffcanvas">
+          <i class="bi bi-list fs-5"></i>
+        </button>
+        <div>
+          <h5 class="fw-bold text-dark mb-0 d-none d-sm-block">Manajemen Pesanan Mitra</h5>
+          <span class="text-secondary small d-none d-md-block">Selamat bertugas, berikan layanan terbaik untuk pelanggan!</span>
+        </div>
+      </div>
+
+      <!-- Right items: Online Switch & Notification -->
+      <div class="d-flex align-items-center gap-2 gap-sm-3">
+        <!-- Online/Offline Switch Component -->
+        <div class="status-toggle-card">
+          <span class="status-dot online" id="partner-status-dot"></span>
+          <span id="partner-status-text" class="fw-bold text-success small d-none d-sm-inline">Online — Siap Terima</span>
+          <label class="custom-switch m-0" title="Ubah status ketersediaan">
+            <input type="checkbox" id="partner-status-toggle" checked>
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <button type="button" class="btn btn-outline-custom position-relative p-2 touch-target" onclick="BetulinAja.showToast('Notifikasi', 'Ada 3 pesanan baru di sekitar lokasi Anda!', 'info')">
+          <i class="bi bi-bell fs-6"></i>
+          <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Partner Page Content -->
+    <main class="p-3 p-md-4 flex-grow-1">
+      <div class="card card-custom p-4 mb-4">
+  <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-4 pb-2 border-bottom">
+    <div>
+      <h5 class="fw-bold text-dark mb-0">Daftar Order Tersedia & Riwayat</h5>
+      <span class="text-secondary small">Terima order terdekat dari lokasi Anda saat ini.</span>
+    </div>
+    <div class="d-flex gap-2">
+      <button type="button" class="btn btn-outline-custom btn-sm" onclick="BetulinAja.showToast('Refresh Data', 'Memperbarui daftar order sekitar...', 'info')">
+        <i class="bi bi-arrow-clockwise me-1"></i> Refresh Order
+      </button>
+    </div>
+  </div>
+
+  <!-- Orders Grid / Cards -->
+  <div class="row g-3">
+    <!-- Order Card 1 -->
+    <div class="col-12 order-card-item">
+      <div class="border rounded-3 p-3 p-md-4 bg-white hover-shadow transition">
+        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2 pb-3 border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge-soft-danger">Pesanan Baru</span>
+            <span class="fw-bold font-monospace text-dark fs-6">#ORD-892134</span>
+            <span class="text-secondary small">&bull; Masuk 15 menit lalu</span>
+          </div>
+          <span class="fw-bold text-success fs-5">Est. Penghasilan: Rp150.000</span>
+        </div>
+
+        <div class="row g-3 py-3 align-items-center">
+          <div class="col-md-5">
+            <h6 class="fw-bold text-dark mb-1">Tambah Freon R32 & Cuci AC 1 PK</h6>
+            <p class="text-secondary small mb-1">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i>Jl. Senopati No. 12, RT 01/RW 03, Kebayoran Baru
+            </p>
+            <span class="badge-soft-secondary small">Jarak: 1.8 km dari Anda</span>
+          </div>
+
+          <div class="col-md-4">
+            <span class="text-muted small d-block">Catatan Kerusakan dari Pelanggan:</span>
+            <p class="text-dark small mb-0 fst-italic">"AC kamar utama hanya keluar angin biasa tidak dingin, ada bau apek."</p>
+          </div>
+
+          <div class="col-md-3 text-md-end">
+            <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+              <a href="index.html/partner/order-detail?order=ORD-892134" class="btn btn-outline-custom btn-sm">
+                Detail
+              </a>
+              <button type="button" class="btn btn-outline-danger btn-sm btn-reject-order" data-id="ORD-892134">
+                Tolak
+              </button>
+              <button type="button" class="btn btn-accent-green btn-sm px-3 btn-accept-order" data-id="ORD-892134">
+                <i class="bi bi-check-lg me-1"></i> Terima
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Card 2 -->
+    <div class="col-12 order-card-item">
+      <div class="border rounded-3 p-3 p-md-4 bg-white hover-shadow transition">
+        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2 pb-3 border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge-soft-info">Dijadwalkan Nanti</span>
+            <span class="fw-bold font-monospace text-dark fs-6">#ORD-892188</span>
+            <span class="text-secondary small">&bull; Hari ini, Pukul 16:00 WIB</span>
+          </div>
+          <span class="fw-bold text-success fs-5">Est. Penghasilan: Rp175.000</span>
+        </div>
+
+        <div class="row g-3 py-3 align-items-center">
+          <div class="col-md-5">
+            <h6 class="fw-bold text-dark mb-1">Perbaikan AC Bocor Menetes Indoor</h6>
+            <p class="text-secondary small mb-1">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i>Jl. Wijaya II No. 8, Melawai, Kebayoran Baru
+            </p>
+            <span class="badge-soft-secondary small">Jarak: 2.9 km dari Anda</span>
+          </div>
+
+          <div class="col-md-4">
+            <span class="text-muted small d-block">Catatan Kerusakan dari Pelanggan:</span>
+            <p class="text-dark small mb-0 fst-italic">"Air menetes deras dari casing indoor membasahi kasur saat dinyalakan."</p>
+          </div>
+
+          <div class="col-md-3 text-md-end">
+            <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+              <a href="index.html/partner/order-detail?order=ORD-892188" class="btn btn-outline-custom btn-sm">
+                Detail
+              </a>
+              <button type="button" class="btn btn-outline-danger btn-sm btn-reject-order" data-id="ORD-892188">
+                Tolak
+              </button>
+              <button type="button" class="btn btn-accent-green btn-sm px-3 btn-accept-order" data-id="ORD-892188">
+                <i class="bi bi-check-lg me-1"></i> Terima
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="partner-bottom-nav">
+    <a href="partner-dashboard.html" class="bottom-nav-item ">
+      <i class="bi bi-grid"></i>
+      <span>Beranda</span>
+    </a>
+    <a href="partner-orders.html" class="bottom-nav-item ">
+      <i class="bi bi-inbox"></i>
+      <span>Pesanan</span>
+    </a>
+    <a href="partner-active-job.html" class="bottom-nav-item ">
+      <i class="bi bi-play-circle"></i>
+      <span>Kerjaan</span>
+    </a>
+    <a href="index.html/partner/earnings" class="bottom-nav-item ">
+      <i class="bi bi-wallet2"></i>
+      <span>Pendapatan</span>
+    </a>
+    <a href="index.html/partner/profile" class="bottom-nav-item ">
+      <i class="bi bi-person"></i>
+      <span>Profil</span>
+    </a>
+  </nav>
+
+</div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Global App JS -->
+  <script src="publicpublic/assets/js/app.js"></script>
+
+    <script src="publicpublic/assets/js/partner.js"></script>
+</body>
+</html>
