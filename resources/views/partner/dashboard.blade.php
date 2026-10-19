@@ -87,6 +87,71 @@
   </div>
 </div>
 
+<!-- Partner Info & Announcement Slideshow Carousel -->
+<div class="mb-4">
+  <div id="partnerCarousel" class="carousel slide carousel-fade hero-carousel-container shadow-sm" data-bs-ride="carousel" data-bs-interval="4500" data-bs-pause="hover" style="border-radius: 16px;">
+    <!-- Indicators -->
+    <div class="carousel-indicators carousel-indicators-pill">
+      <button type="button" data-bs-target="#partnerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Info 1: Tips Kinerja"></button>
+      <button type="button" data-bs-target="#partnerCarousel" data-bs-slide-to="1" aria-label="Info 2: Insentif & Dompet"></button>
+      <button type="button" data-bs-target="#partnerCarousel" data-bs-slide-to="2" aria-label="Info 3: SOP Pelayanan"></button>
+    </div>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="height: 220px; background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1000&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; position: relative;">
+        <div class="hero-carousel-overlay" style="background: linear-gradient(90deg, rgba(20, 33, 61, 0.95) 0%, rgba(20, 33, 61, 0.75) 60%, rgba(20, 33, 61, 0.4) 100%);"></div>
+        <div class="position-relative p-4 text-white" style="z-index: 2; max-width: 580px;">
+          <span class="badge bg-warning text-dark px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
+            <i class="bi bi-award-fill me-1"></i> Program Insentif Mitra
+          </span>
+          <h5 class="fw-bold mb-1">Raih Bonus Tambahan Setiap 10 Pesanan Tuntas!</h5>
+          <p class="text-white-50 small mb-2 d-none d-sm-block">Pertahankan rating bintang di atas 4.8 untuk mendapatkan prioritas pesanan radius terdekat.</p>
+          <a href="{{ url('/partner/earnings') }}" class="btn btn-primary-custom btn-sm px-3">
+            <i class="bi bi-wallet2 me-1"></i> Cek Dompet Saya
+          </a>
+        </div>
+      </div>
+
+      <div class="carousel-item" style="height: 220px; background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1000&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; position: relative;">
+        <div class="hero-carousel-overlay" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.92) 0%, rgba(4, 120, 87, 0.8) 60%, rgba(4, 120, 87, 0.4) 100%);"></div>
+        <div class="position-relative p-4 text-white" style="z-index: 2; max-width: 580px;">
+          <span class="badge bg-white text-success px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
+            <i class="bi bi-shield-check me-1"></i> SOP Kualitas Pelayanan
+          </span>
+          <h5 class="fw-bold mb-1">Pastikan Foto Sebelum & Sesudah Pengerjaan</h5>
+          <p class="text-white-50 small mb-2 d-none d-sm-block">Foto bukti yang jelas mempercepat pencairan saldo dan meningkatkan kepercayaan pelanggan.</p>
+          <a href="{{ url('/partner/orders') }}" class="btn btn-light btn-sm px-3 text-dark fw-semibold">
+            Lihat Pesanan Masuk
+          </a>
+        </div>
+      </div>
+
+      <div class="carousel-item" style="height: 220px; background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; position: relative;">
+        <div class="hero-carousel-overlay" style="background: linear-gradient(90deg, rgba(37, 99, 235, 0.95) 0%, rgba(29, 78, 216, 0.8) 60%, rgba(29, 78, 216, 0.4) 100%);"></div>
+        <div class="position-relative p-4 text-white" style="z-index: 2; max-width: 580px;">
+          <span class="badge bg-warning text-dark px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
+            <i class="bi bi-geo-alt-fill me-1"></i> Perluasan Area Layanan
+          </span>
+          <h5 class="fw-bold mb-1">Permintaan Tinggi di Area Tangerang & Jaksel</h5>
+          <p class="text-white-50 small mb-2 d-none d-sm-block">Aktifkan status "Online" untuk menerima pesanan panggilan instan terdekat.</p>
+          <a href="{{ url('/partner/profile') }}" class="btn btn-outline-light btn-sm px-3">
+            Atur Radius Operasional
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev carousel-btn-control" type="button" data-bs-target="#partnerCarousel" data-bs-slide="prev" aria-label="Sebelumnya" style="width: 38px; height: 38px; font-size: 1rem;">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <button class="carousel-control-next carousel-btn-control" type="button" data-bs-target="#partnerCarousel" data-bs-slide="next" aria-label="Berikutnya" style="width: 38px; height: 38px; font-size: 1rem;">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
 <!-- Incoming Orders List -->
 <div class="card card-custom p-4 mb-4">
   <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">

@@ -92,6 +92,99 @@
   </div>
 </section>
 
+<!-- =========================================================================
+     SLIDESHOW BANNER PROMO & KEUNGGULAN (AUTO-SLIDE & INTERAKTIF)
+     ========================================================================= -->
+<section class="py-4 py-md-5 bg-light border-bottom">
+  <div class="container">
+    <div id="promoCarousel" class="carousel slide carousel-fade hero-carousel-container shadow-sm" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover">
+      <!-- Indicators (Pills) -->
+      <div class="carousel-indicators carousel-indicators-pill">
+        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1: Promo Service AC"></button>
+        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="1" aria-label="Slide 2: Garansi & Teknisi Bersertifikat"></button>
+        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="2" aria-label="Slide 3: Inovasi Mahasiswa UNIPI"></button>
+      </div>
+
+      <!-- Carousel Slides -->
+      <div class="carousel-inner">
+        <!-- Slide 1: Promo AC -->
+        <div class="carousel-item active hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1400&auto=format&fit=crop&q=80');">
+          <div class="hero-carousel-overlay"></div>
+          <div class="hero-carousel-content">
+            <span class="badge bg-warning text-dark px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
+              <i class="bi bi-tag-fill me-1"></i> Promo Spesial Pekan Ini
+            </span>
+            <h2 class="display-6 fw-bold mb-2">Cuci AC Bersih Maksimal, Udara Segar & Hemat Listrik</h2>
+            <p class="text-white-50 mb-3 small d-none d-sm-block">
+              Teknisi AC terlatih siap datang ke rumah dalam 30 menit. Pembersihan menyeluruh indoor, outdoor, freon dan garansi dingin 30 hari.
+            </p>
+            <div class="d-flex flex-wrap gap-2 pt-1">
+              <a href="{{ url('/customer/booking?cat=Service%20AC') }}" class="btn btn-primary-custom btn-sm px-4">
+                <i class="bi bi-tools me-1"></i> Pesan Cuci AC (Mulai Rp75k)
+              </a>
+              <a href="{{ url('/customer/estimate') }}" class="btn btn-outline-light btn-sm px-3">
+                <i class="bi bi-calculator me-1"></i> Cek Estimasi
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Keamanan & Garansi -->
+        <div class="carousel-item hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1400&auto=format&fit=crop&q=80');">
+          <div class="hero-carousel-overlay"></div>
+          <div class="hero-carousel-content">
+            <span class="badge bg-success text-white px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
+              <i class="bi bi-shield-check me-1"></i> 100% Teknisi Terverifikasi SKCK
+            </span>
+            <h2 class="display-6 fw-bold mb-2">Solusi Perbaikan Listrik & Pipa Tanpa Cemas</h2>
+            <p class="text-white-50 mb-3 small d-none d-sm-block">
+              Seluruh teknisi BetulinAja telah melalui uji kompetensi ketat dan berstandar SOP resmi. Aman untuk keluarga, tuntas bergaransi.
+            </p>
+            <div class="d-flex flex-wrap gap-2 pt-1">
+              <a href="{{ url('/customer/technicians') }}" class="btn btn-primary-custom btn-sm px-4">
+                <i class="bi bi-person-check me-1"></i> Lihat Daftar Teknisi
+              </a>
+              <a href="{{ url('/customer/services') }}" class="btn btn-outline-light btn-sm px-3">
+                Katalog Layanan
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Kampus UNIPI & Digitalisasi -->
+        <div class="carousel-item hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&auto=format&fit=crop&q=80');">
+          <div class="hero-carousel-overlay"></div>
+          <div class="hero-carousel-content">
+            <span class="badge bg-primary text-white px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
+              <i class="bi bi-mortarboard-fill me-1"></i> Universitas Insan Pembangunan Indonesia
+            </span>
+            <h2 class="display-6 fw-bold mb-2">Platform Marketplace Jasa Modern Karya Mahasiswa</h2>
+            <p class="text-white-50 mb-3 small d-none d-sm-block">
+              Menghadirkan transparansi harga, pelacakan live GPS teknisi, dan kemudahan pemesanan service rumah dalam satu sentuhan.
+            </p>
+            <div class="d-flex flex-wrap gap-2 pt-1">
+              <a href="#tim-pengembang" class="btn btn-primary-custom btn-sm px-4">
+                <i class="bi bi-people me-1"></i> Profil Tim Pengembang
+              </a>
+              <a href="{{ url('/customer/booking') }}" class="btn btn-outline-light btn-sm px-3">
+                Coba Pemesanan
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls (Tombol Panah Kiri & Kanan) -->
+      <button class="carousel-control-prev carousel-btn-control" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev" aria-label="Slide Sebelumnya">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="carousel-control-next carousel-btn-control" type="button" data-bs-target="#promoCarousel" data-bs-slide="next" aria-label="Slide Berikutnya">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- Kategori Layanan Grid (8 Kategori) -->
 <section class="section-padding bg-white">
   <div class="container">
