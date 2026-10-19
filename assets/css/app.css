@@ -372,6 +372,179 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 5rem;
 }
 
+/* ==========================================================================
+   Interactive Floating Widgets & Enhancements
+   ========================================================================== */
+
+/* Floating WhatsApp Button & Pulse */
+.floating-wa-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1040;
+  width: 58px;
+  height: 58px;
+  background-color: #25D366;
+  color: #FFFFFF !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.85rem;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: waPulse 2.5s infinite;
+  text-decoration: none;
+}
+
+.floating-wa-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+  color: #FFFFFF;
+}
+
+@keyframes waPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Floating WA Quick Chat Box */
+.wa-quick-box {
+  position: fixed;
+  bottom: 92px;
+  right: 24px;
+  width: 320px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(20, 33, 61, 0.15);
+  border: 1px solid #E2E8F0;
+  z-index: 1040;
+  overflow: hidden;
+  display: none;
+  animation: fadeInSlideUp 0.3s ease;
+}
+
+.wa-quick-box.active {
+  display: block;
+}
+
+@keyframes fadeInSlideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll To Top Button */
+.btn-scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 90px;
+  z-index: 1030;
+  width: 44px;
+  height: 44px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  color: var(--primary) !important;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 14px rgba(20, 33, 61, 0.08);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-scroll-top:hover {
+  background-color: var(--primary);
+  color: #FFFFFF !important;
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.btn-scroll-top.visible {
+  display: flex;
+}
+
+/* Live Search Autocomplete Dropdown */
+.search-suggestion-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(20, 33, 61, 0.12);
+  margin-top: 6px;
+  z-index: 1050;
+  overflow: hidden;
+  display: none;
+}
+
+.search-suggestion-box.active {
+  display: block;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  color: var(--text-main);
+  text-decoration: none;
+  border-bottom: 1px solid #F1F5F9;
+  transition: background-color 0.15s ease;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: #F8FAFC;
+  color: var(--primary);
+}
+
+/* Social Proof Notification (Bottom Left) */
+.social-proof-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1030;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 10px 25px rgba(20, 33, 61, 0.1);
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 340px;
+  animation: slideInLeft 0.4s ease, fadeOutProof 0.5s 4.5s forwards;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeOutProof {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-30px); pointer-events: none; }
+}
+
+/* Enhanced Hover Card Transition */
+.hover-card {
+  transition: transform 0.25s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.25s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.hover-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 16px 32px -4px rgba(37, 99, 235, 0.12), 0 6px 12px -2px rgba(20, 33, 61, 0.05) !important;
+}
+
 @media (max-width: 768px) {
   .section-padding {
     padding-top: 3rem;
@@ -387,5 +560,24 @@ h1, h2, h3, h4, h5, h6 {
   .custom-toast {
     min-width: 100%;
     max-width: 100%;
+  }
+
+  .floating-wa-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    font-size: 1.6rem;
+  }
+
+  .btn-scroll-top {
+    bottom: 20px;
+    right: 80px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-proof-toast {
+    display: none; /* Jangan menutupi layar mobile */
   }
 }
