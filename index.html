@@ -213,171 +213,106 @@
 
   <!-- Main Customer Content -->
   <main class="flex-grow-1">
-    <!-- Hero Section -->
-<section class="hero-section">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <!-- Hero Text & Search -->
-      <div class="col-lg-6">
-        <div class="hero-badge">
-          <i class="bi bi-shield-check-fill text-success fs-5"></i>
-          <span>100% Teknisi Terverifikasi & Bergaransi</span>
-        </div>
-
-        <h1 class="hero-title">
-          Semua Masalah Rumah,<br>
-          <span class="text-primary">BetulinAja!</span>
-        </h1>
-
-        <p class="hero-subtitle">
-          Panggil teknisi terpercaya untuk memperbaiki masalah AC, elektronik, listrik, plumbing, dan perabot rumah tanpa ribet. Transparan, cepat, dan berstandar profesional.
-        </p>
-
-        <!-- Search Bar -->
-        <form action="services.html" method="GET" class="hero-search-wrapper mb-4">
-          <i class="bi bi-search text-secondary ms-2 fs-5"></i>
-          <input type="text" name="q" class="form-control hero-search-input" placeholder="Cari layanan: Cuci AC, Kulkas mati, Pipa bocor...">
-          <button type="submit" class="btn btn-primary-custom text-nowrap px-4">
-            Cari Layanan
-          </button>
-        </form>
-
-        <div class="d-flex flex-wrap align-items-center gap-3">
-          <a href="booking.html" class="btn btn-primary-custom btn-lg px-4 shadow-sm">
-            <i class="bi bi-calendar-check me-2"></i> Pesan Sekarang
-          </a>
-          <a href="estimate.html" class="btn btn-outline-custom btn-lg px-4">
-            <i class="bi bi-calculator me-2"></i> Cek Estimasi Biaya
-          </a>
-        </div>
-
-        <!-- Quick Trust Metrics -->
-        <div class="row g-3 mt-4 pt-3 border-top">
-          <div class="col-4">
-            <h4 class="fw-bold text-dark mb-0">15.000+</h4>
-            <span class="text-secondary small">Perbaikan Sukses</span>
-          </div>
-          <div class="col-4 border-start ps-3">
-            <h4 class="fw-bold text-dark mb-0">850+</h4>
-            <span class="text-secondary small">Teknisi Ahli</span>
-          </div>
-          <div class="col-4 border-start ps-3">
-            <h4 class="fw-bold text-dark mb-0">4.9 / 5.0</h4>
-            <span class="text-secondary small">Kepuasan Pelanggan</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Visual Card -->
-      <div class="col-lg-6">
-        <div class="position-relative">
-          <div class="hero-img-card">
-            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80" alt="Teknisi Profesional BetulinAja" class="img-fluid w-100 object-fit-cover" style="height: 440px;">
-          </div>
-
-          <!-- Floating Stat Badge 1 (Top Left) -->
-          <div class="hero-floating-stat hero-stat-top">
-            <div class="category-icon-box m-0 bg-success text-white" style="width: 44px; height: 44px; font-size: 1.25rem;">
-              <i class="bi bi-patch-check"></i>
-            </div>
-            <div>
-              <span class="fw-bold text-dark d-block" style="font-size: 0.9rem;">Mitra Tersertifikasi</span>
-              <span class="text-secondary small">Lolos Uji Kualifikasi</span>
-            </div>
-          </div>
-
-          <!-- Floating Stat Badge 2 (Bottom Right) -->
-          <div class="hero-floating-stat hero-stat-bottom">
-            <div class="category-icon-box m-0 bg-primary text-white" style="width: 44px; height: 44px; font-size: 1.25rem;">
-              <i class="bi bi-shield-fill-check"></i>
-            </div>
-            <div>
-              <span class="fw-bold text-dark d-block" style="font-size: 0.9rem;">Garansi 30 Hari</span>
-              <span class="text-secondary small">Jaminan Kerja Tuntas</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =========================================================================
-     SLIDESHOW BANNER PROMO & KEUNGGULAN (AUTO-SLIDE & INTERAKTIF)
+    <!-- =========================================================================
+     HERO SLIDESHOW CAROUSEL (PALING ATAS, AUTO-SLIDE & INTERAKTIF)
      ========================================================================= -->
-<section class="py-4 py-md-5 bg-light border-bottom">
+<section class="pt-3 pt-md-4 pb-4 bg-light border-bottom">
   <div class="container">
-    <div id="promoCarousel" class="carousel slide carousel-fade hero-carousel-container shadow-sm" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover">
+    <div id="promoCarousel" class="carousel slide carousel-fade hero-carousel-container shadow" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover" style="border-radius: 20px; overflow: hidden;">
       <!-- Indicators (Pills) -->
       <div class="carousel-indicators carousel-indicators-pill">
-        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1: Promo Service AC"></button>
-        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="1" aria-label="Slide 2: Garansi & Teknisi Bersertifikat"></button>
+        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1: Solusi Perbaikan Rumah"></button>
+        <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="1" aria-label="Slide 2: Promo Cuci AC"></button>
         <button type="button" data-bs-target="#promoCarousel" data-bs-slide-to="2" aria-label="Slide 3: Inovasi Mahasiswa UNIPI"></button>
       </div>
 
-      <!-- Carousel Slides -->
+      <!-- Carousel Inner -->
       <div class="carousel-inner">
-        <!-- Slide 1: Promo AC -->
-        <div class="carousel-item active hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1400&auto=format&fit=crop&q=80');">
-          <div class="hero-carousel-overlay"></div>
-          <div class="hero-carousel-content">
-            <span class="badge bg-warning text-dark px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
-              <i class="bi bi-tag-fill me-1"></i> Promo Spesial Pekan Ini
-            </span>
-            <h2 class="display-6 fw-bold mb-2">Cuci AC Bersih Maksimal, Udara Segar & Hemat Listrik</h2>
-            <p class="text-white-50 mb-3 small d-none d-sm-block">
-              Teknisi AC terlatih siap datang ke rumah dalam 30 menit. Pembersihan menyeluruh indoor, outdoor, freon dan garansi dingin 30 hari.
+        <!-- Slide 1: Solusi Utama (Brand Hero) -->
+        <div class="carousel-item active hero-carousel-item" style="height: 450px; background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1400&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; position: relative;">
+          <!-- High Contrast Dark Gradient Overlay agar font tidak nabrak -->
+          <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg, rgba(15, 23, 42, 0.96) 0%, rgba(15, 23, 42, 0.88) 55%, rgba(15, 23, 42, 0.3) 100%); z-index: 1;"></div>
+          
+          <div class="container position-relative py-4 px-4 px-md-5" style="z-index: 2; max-width: 680px; margin-left: 0;">
+            <div class="d-inline-flex align-items-center gap-2 bg-success text-white px-3 py-1 rounded-pill small fw-bold mb-3 shadow-sm">
+              <i class="bi bi-shield-fill-check"></i>
+              <span>100% Teknisi Terverifikasi & Bergaransi 30 Hari</span>
+            </div>
+            
+            <h1 class="display-6 fw-bolder text-white mb-3" style="text-shadow: 0 2px 8px rgba(0,0,0,0.6); line-height: 1.2;">
+              Semua Masalah Rumah, <br><span class="text-primary" style="color: #60A5FA !important;">BetulinAja!</span>
+            </h1>
+            
+            <p class="mb-4 text-light lead small fs-6" style="color: #E2E8F0 !important; max-width: 580px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.6;">
+              Panggil teknisi profesional terdekat untuk service AC, instalasi listrik, plumbing pipa mampet, dan perbaikan elektronik. Cepat, transparan, dan berstandar SOP resmi.
             </p>
-            <div class="d-flex flex-wrap gap-2 pt-1">
-              <a href="booking.html?cat=Service%20AC" class="btn btn-primary-custom btn-sm px-4">
-                <i class="bi bi-tools me-1"></i> Pesan Cuci AC (Mulai Rp75k)
+            
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <a href="booking.html" class="btn btn-primary-custom btn-lg px-4 shadow">
+                <i class="bi bi-calendar-check me-2"></i> Pesan Sekarang
               </a>
-              <a href="estimate.html" class="btn btn-outline-light btn-sm px-3">
-                <i class="bi bi-calculator me-1"></i> Cek Estimasi
+              <a href="estimate.html" class="btn btn-light btn-lg px-4 fw-semibold text-dark shadow-sm">
+                <i class="bi bi-calculator me-2 text-primary"></i> Cek Estimasi Biaya
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Slide 2: Keamanan & Garansi -->
-        <div class="carousel-item hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1400&auto=format&fit=crop&q=80');">
-          <div class="hero-carousel-overlay"></div>
-          <div class="hero-carousel-content">
-            <span class="badge bg-success text-white px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
-              <i class="bi bi-shield-check me-1"></i> 100% Teknisi Terverifikasi SKCK
-            </span>
-            <h2 class="display-6 fw-bold mb-2">Solusi Perbaikan Listrik & Pipa Tanpa Cemas</h2>
-            <p class="text-white-50 mb-3 small d-none d-sm-block">
-              Seluruh teknisi BetulinAja telah melalui uji kompetensi ketat dan berstandar SOP resmi. Aman untuk keluarga, tuntas bergaransi.
+        <!-- Slide 2: Promo Cuci & Service AC -->
+        <div class="carousel-item hero-carousel-item" style="height: 450px; background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1400&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; position: relative;">
+          <!-- High Contrast Dark Gradient Overlay -->
+          <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg, rgba(15, 23, 42, 0.96) 0%, rgba(15, 23, 42, 0.88) 55%, rgba(15, 23, 42, 0.3) 100%); z-index: 1;"></div>
+          
+          <div class="container position-relative py-4 px-4 px-md-5" style="z-index: 2; max-width: 680px; margin-left: 0;">
+            <div class="d-inline-flex align-items-center gap-2 bg-warning text-dark px-3 py-1 rounded-pill small fw-bold mb-3 shadow-sm">
+              <i class="bi bi-tag-fill text-dark"></i>
+              <span>Promo Spesial &bull; Mulai Rp75.000</span>
+            </div>
+            
+            <h1 class="display-6 fw-bolder text-white mb-3" style="text-shadow: 0 2px 8px rgba(0,0,0,0.6); line-height: 1.2;">
+              Cuci AC Bersih Tuntas, Udara Sejuk Bebas Bakteri
+            </h1>
+            
+            <p class="mb-4 text-light lead small fs-6" style="color: #E2E8F0 !important; max-width: 580px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.6;">
+              Pembersihan menyeluruh unit indoor & outdoor, pengecekan tekanan freon, dan perbaikan kebocoran air. Teknisi tiba dalam 30 menit.
             </p>
-            <div class="d-flex flex-wrap gap-2 pt-1">
-              <a href="technicians.html" class="btn btn-primary-custom btn-sm px-4">
-                <i class="bi bi-person-check me-1"></i> Lihat Daftar Teknisi
+            
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <a href="booking.html?cat=Service%20AC" class="btn btn-primary-custom btn-lg px-4 shadow">
+                <i class="bi bi-tools me-2"></i> Pesan Cuci AC
               </a>
-              <a href="services.html" class="btn btn-outline-light btn-sm px-3">
-                Katalog Layanan
+              <a href="services.html" class="btn btn-light btn-lg px-4 fw-semibold text-dark shadow-sm">
+                Lihat Daftar Layanan
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Slide 3: Kampus UNIPI & Digitalisasi -->
-        <div class="carousel-item hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&auto=format&fit=crop&q=80');">
-          <div class="hero-carousel-overlay"></div>
-          <div class="hero-carousel-content">
-            <span class="badge bg-primary text-white px-3 py-1 rounded-pill small fw-bold mb-2 d-inline-block">
-              <i class="bi bi-mortarboard-fill me-1"></i> Universitas Insan Pembangunan Indonesia
-            </span>
-            <h2 class="display-6 fw-bold mb-2">Platform Marketplace Jasa Modern Karya Mahasiswa</h2>
-            <p class="text-white-50 mb-3 small d-none d-sm-block">
-              Menghadirkan transparansi harga, pelacakan live GPS teknisi, dan kemudahan pemesanan service rumah dalam satu sentuhan.
+        <!-- Slide 3: Kampus UNIPI & Tim Pengembang -->
+        <div class="carousel-item hero-carousel-item" style="height: 450px; background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; position: relative;">
+          <!-- High Contrast Dark Gradient Overlay -->
+          <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg, rgba(15, 23, 42, 0.96) 0%, rgba(15, 23, 42, 0.88) 55%, rgba(15, 23, 42, 0.3) 100%); z-index: 1;"></div>
+          
+          <div class="container position-relative py-4 px-4 px-md-5" style="z-index: 2; max-width: 680px; margin-left: 0;">
+            <div class="d-inline-flex align-items-center gap-2 bg-primary text-white px-3 py-1 rounded-pill small fw-bold mb-3 shadow-sm">
+              <i class="bi bi-mortarboard-fill"></i>
+              <span>Universitas Insan Pembangunan Indonesia (UNIPI)</span>
+            </div>
+            
+            <h1 class="display-6 fw-bolder text-white mb-3" style="text-shadow: 0 2px 8px rgba(0,0,0,0.6); line-height: 1.2;">
+              Platform Inovasi Marketplace Jasa Karya Mahasiswa
+            </h1>
+            
+            <p class="mb-4 text-light lead small fs-6" style="color: #E2E8F0 !important; max-width: 580px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.6;">
+              Dikembangkan oleh Iqbal Adityajaya (Lead Developer), Maulana Rizki (Penemu), dan Sapriadi Sandy (CEO) untuk mendigitalisasi layanan perbaikan rumah di Indonesia.
             </p>
-            <div class="d-flex flex-wrap gap-2 pt-1">
-              <a href="#tim-pengembang" class="btn btn-primary-custom btn-sm px-4">
-                <i class="bi bi-people me-1"></i> Profil Tim Pengembang
+            
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <a href="#tim-pengembang" class="btn btn-primary-custom btn-lg px-4 shadow">
+                <i class="bi bi-people me-2"></i> Profil Tim Pengembang
               </a>
-              <a href="booking.html" class="btn btn-outline-light btn-sm px-3">
-                Coba Pemesanan
+              <a href="https://wa.me/6285714310516" target="_blank" class="btn btn-light btn-lg px-4 fw-semibold text-dark shadow-sm">
+                <i class="bi bi-whatsapp text-success me-2"></i> Hubungi Pengembang
               </a>
             </div>
           </div>
@@ -391,6 +326,44 @@
       <button class="carousel-control-next carousel-btn-control" type="button" data-bs-target="#promoCarousel" data-bs-slide="next" aria-label="Slide Berikutnya">
         <i class="bi bi-chevron-right"></i>
       </button>
+    </div>
+
+    <!-- Quick Search Bar & Trust Stats (Di Bawah Slideshow) -->
+    <div class="card border-0 shadow-sm rounded-4 p-3 p-md-4 mt-3 bg-white">
+      <div class="row align-items-center g-3">
+        <!-- Search Input -->
+        <div class="col-lg-6">
+          <form action="services.html" method="GET" class="position-relative m-0">
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0 ps-3">
+                <i class="bi bi-search text-primary"></i>
+              </span>
+              <input type="text" name="q" class="form-control bg-light border-start-0 py-2 ps-2" placeholder="Cari layanan: Cuci AC, Kulkas mati, Pipa bocor, Listrik...">
+              <button type="submit" class="btn btn-primary-custom px-4">
+                Cari Jasa
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 3 Quick Metrics -->
+        <div class="col-lg-6">
+          <div class="d-flex align-items-center justify-content-around text-center pt-2 pt-lg-0 border-top border-lg-0">
+            <div>
+              <h5 class="fw-bold text-dark mb-0 fs-6 fs-md-5">15.000+</h5>
+              <span class="text-secondary small" style="font-size: 0.75rem;">Perbaikan Sukses</span>
+            </div>
+            <div class="border-start ps-3">
+              <h5 class="fw-bold text-dark mb-0 fs-6 fs-md-5">850+</h5>
+              <span class="text-secondary small" style="font-size: 0.75rem;">Teknisi Ahli</span>
+            </div>
+            <div class="border-start ps-3">
+              <h5 class="fw-bold text-dark mb-0 fs-6 fs-md-5">4.9 / 5.0</h5>
+              <span class="text-secondary small" style="font-size: 0.75rem;">Kepuasan Pelanggan</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
