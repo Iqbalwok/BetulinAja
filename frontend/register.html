@@ -218,6 +218,16 @@
 
     document.getElementById('register-form').addEventListener('submit', async function(e) {
       e.preventDefault();
+
+      const submitBtn = document.getElementById('btn-submit-register');
+      const spinner = document.getElementById('btn-register-spinner');
+      const btnText = document.getElementById('btn-register-text');
+      const errAlert = document.getElementById('register-error-alert');
+      const errText = document.getElementById('register-error-text');
+
+      errAlert.classList.add('d-none');
+      errText.textContent = '';
+
       const role = document.getElementById('role-input').value;
       const name = document.getElementById('name-input').value.trim();
       const email = document.getElementById('email-input').value.trim();
@@ -227,12 +237,6 @@
       }
       const password = document.getElementById('password-input').value;
       const passwordConfirmation = document.getElementById('password-confirm-input').value;
-
-      const submitBtn = document.getElementById('btn-submit-register');
-      const spinner = document.getElementById('btn-register-spinner');
-      const btnText = document.getElementById('btn-register-text');
-      const errAlert = document.getElementById('register-error-alert');
-      const errText = document.getElementById('register-error-text');
 
       if (password !== passwordConfirmation) {
         errText.textContent = 'Konfirmasi kata sandi tidak cocok. Harap periksa kembali.';
@@ -263,13 +267,6 @@
         payload.category_ids = selectedCats.length > 0 ? selectedCats : [1];
       }
 
-      const submitBtn = document.getElementById('btn-submit-register');
-      const spinner = document.getElementById('btn-register-spinner');
-      const btnText = document.getElementById('btn-register-text');
-      const errAlert = document.getElementById('register-error-alert');
-      const errText = document.getElementById('register-error-text');
-
-      errAlert.classList.add('d-none');
       submitBtn.disabled = true;
       spinner.classList.remove('d-none');
       btnText.textContent = 'Mendaftarkan...';
@@ -289,6 +286,13 @@
 
         ApiClient.showToast('Registrasi Berhasil', `Selamat datang, ${data.user.name}! Akun Anda telah siap.`, 'success', 2500);
         setTimeout(() => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const returnUrl = urlParams.get('returnUrl');
+          if (returnUrl) {
+            window.location.href = decodeURIComponent(returnUrl);
+            return;
+          }
+
           if (data.user.role === 'partner') {
             window.location.href = 'partner/dashboard.html';
           } else {
