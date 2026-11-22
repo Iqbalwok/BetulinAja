@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/register",
+      "dest": "/register.html"
+    },
+    {
+      "src": "/services",
+      "dest": "/services.html"
+    },
+    {
+      "src": "/technicians",
+      "dest": "/technicians.html"
+    },
+    {
+      "src": "/technician-detail",
+      "dest": "/technician-detail.html"
+    },
+    {
+      "src": "/technicians/([0-9]+)",
+      "dest": "/technician-detail.html?id=$1"
+    },
+    {
+      "src": "/estimate",
+      "dest": "/estimate.html"
+    },
+    {
+      "src": "/location",
+      "dest": "/location.html"
+    },
+    {
+      "src": "/booking",
+      "dest": "/booking.html"
+    },
+    {
+      "src": "/order-history",
+      "dest": "/order-history.html"
+    },
+    {
+      "src": "/tracking",
+      "dest": "/tracking.html"
+    },
+    {
+      "src": "/profile",
+      "dest": "/profile.html"
+    },
+    {
+      "src": "/founders",
+      "dest": "/founders.html"
+    },
+    {
+      "src": "/partner/login",
+      "dest": "/login.html?role=partner"
+    },
+    {
+      "src": "/partner/dashboard",
+      "dest": "/partner/dashboard.html"
+    },
+    {
+      "src": "/partner/orders",
+      "dest": "/partner/orders.html"
+    },
+    {
+      "src": "/partner/active-job",
+      "dest": "/partner/active-job.html"
+    },
+    {
+      "src": "/admin/dashboard",
+      "dest": "/admin/dashboard.html"
+    },
+    {
+      "src": "/admin/orders",
+      "dest": "/admin/orders.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}

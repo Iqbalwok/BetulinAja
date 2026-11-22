@@ -1,141 +1,146 @@
-# BetulinAja — Frontend Marketplace Jasa Service & Perbaikan Rumah
+# BetulinAja — Fullstack Marketplace Jasa Service & Perbaikan Rumah
 
 > **"Semua Masalah Rumah, BetulinAja!"**  
-> Platform marketplace modern yang menghubungkan pelanggan dengan teknisi profesional untuk service AC, elektronik, listrik, plumbing, kulkas, komputer, dan perbaikan rumah lainnya secara transparan, aman, dan mudah.
+> Platform marketplace modern perbaikan rumah (*home repair services*) berbasis arsitektur *decoupled fullstack*: Frontend statis teroptimasi untuk **Vercel**, REST API berbasis **Laravel 12 (Sanctum)**, dan integrasi **Database Cloud Persisten**.
 
 ### 🎓 Tim Pengembang — Universitas Insan Pembangunan Indonesia (UNIPI)
-| Nama | Peran | Kontak |
-|---|---|---|
-| **Iqbal Adityajaya** | Pembuat & Pengembang (Lead Developer) | 085714310516 |
-| **Maulana Rizki** | Penemu (Founder / Innovator) | - |
-| **Sapriadi Sandy** | CEO (Chief Executive Officer) | - |
+*Tugas Kelompok Mata Kuliah Komputasi Awan (Cloud Computing)*
+
+| No | Nama Mahasiswa | Peran Utama | Tanggung Jawab Teknis |
+|---|---|---|---|
+| 1 | **Iqbal Adityajaya** | **Lead Developer & Software Engineer** | REST API Laravel, Database Architecture, Frontend Integration (`api.js`, `auth.js`, `booking.js`), Automated Tests |
+| 2 | **Maulana Rizki** | **Founder & Business Solution Architect** | Konsep Produk, Service Pricing Rules, UI/UX Workflow & Wireframe, Validasi Kebutuhan Pengguna |
+| 3 | **Sapriadi Sandy** | **Chief Executive Officer & DevOps Engineer** | Cloud Infrastructure, Vercel & Railway Deployment, Security Hardening, QA & Dokumentasi |
 
 ---
 
-## 1. Ikhtisar Project
+## 📑 Daftar Dokumentasi Teknis Lengkap
 
-Repositori ini memuat **tahap frontend lengkap (UI/UX)** untuk platform **BetulinAja** yang dibangun di atas arsitektur **Laravel 12 Blade Templates** dengan pendekatan **Mobile-First Responsive Design**.
-
-### Palet Warna & Identitas Visual
-- **Primary Blue:** `#2563EB` (Aksi utama, tombol CTA, link aktif)
-- **Dark Navy:** `#14213D` (Sidebar admin, heading hero, footer)
-- **Soft Blue:** `#EFF6FF` (Latar belakang elemen terpilih, ikon, banner informasi)
-- **Green Accent:** `#10B981` (Status berhasil, verifikasi teknisi, tombol terima order)
-- **Soft Green:** `#ECFDF5` (Badge status sukses & verifikasi)
-- **Background:** `#F8FAFC`
-- **Surface:** `#FFFFFF`
-- **Main Text:** `#1E293B`
-- **Secondary Text:** `#64748B`
-- **Border:** `#E2E8F0`
-
-### Teknologi yang Digunakan
-- **Framework:** Laravel 12 (Blade Engine)
-- **CSS Framework:** Bootstrap 5.3.3 + Custom Design System (`app.css`, `customer.css`, `partner.css`, `admin.css`)
-- **Typography:** Inter (Google Fonts)
-- **Ikon:** Bootstrap Icons (v1.11.3)
-- **Peta Interaktif:** Leaflet.js (v1.9.4) & OpenStreetMap
-- **Grafik Dashboard:** Chart.js (v4.4.2)
-- **JavaScript:** Vanilla JS dengan modul terstruktur (`app.js`, `customer.js`, `partner.js`, `admin.js`)
+1. 📄 **[AUDIT_REPORT.md](file:///c:/xampp/htdocs/BetulinAja/AUDIT_REPORT.md)** — Laporan audit menyeluruh, inventarisasi kode, identifikasi celah keamanan, dan rencana refactor.
+2. 🗄️ **[DATABASE_ERD.md](file:///c:/xampp/htdocs/BetulinAja/DATABASE_ERD.md)** — Entity-Relationship Diagram (ERD), skema tabel relasional, constraint foreign key, formula tarif, dan panduan migrasi.
+3. 🔌 **[API_DOCUMENTATION.md](file:///c:/xampp/htdocs/BetulinAja/API_DOCUMENTATION.md)** — Dokumentasi seluruh endpoint REST API v1 (Auth, Customer, Partner, Admin).
+4. 🚀 **[DEPLOYMENT_GUIDE.md](file:///c:/xampp/htdocs/BetulinAja/DEPLOYMENT_GUIDE.md)** — Panduan deployment langkah-demi-langkah GitHub $\rightarrow$ Vercel $\rightarrow$ Backend Hosting Cloud.
+5. 🧪 **[TESTING_REPORT.md](file:///c:/xampp/htdocs/BetulinAja/TESTING_REPORT.md)** — Laporan hasil automated testing PHPUnit (21 test cases, 89 assertions passed 100%).
 
 ---
 
-## 2. Cara Menjalankan Project Secara Lokal
+## 🏛️ Arsitektur Sistem & Struktur Folder
+
+```text
+BetulinAja/
+├── frontend/                     # Frontend Vercel (Root Directory untuk Vercel)
+│   ├── index.html                # Landing page interaktif + Hero Slideshow
+│   ├── login.html                # Unified Auth: Pelanggan, Mitra & Admin
+│   ├── register.html             # Registrasi Pelanggan & Mitra Teknisi
+│   ├── booking.html              # Multi-step booking wizard (terhubung ke API)
+│   ├── order-history.html        # Riwayat pesanan pelanggan real-time
+│   ├── tracking.html             # Live tracking & stepper progress pesanan
+│   ├── services.html             # Katalog layanan dengan filter dinamis
+│   ├── technicians.html          # Direktori mitra teknisi terverifikasi
+│   ├── estimate.html             # Kalkulator estimasi biaya interaktif
+│   ├── location.html             # Peta jangkauan wilayah layanan
+│   ├── profile.html              # Pengaturan profil pengguna
+│   ├── partner/                  # Portal Khusus Mitra Teknisi
+│   │   ├── dashboard.html        # Statistik pendapatan & toggle online/offline
+│   │   ├── orders.html           # Pesanan masuk & tombol accept/reject
+│   │   └── active-job.html       # Lembar kerja aktif: Menuju Lokasi -> Tiba -> Mulai -> Selesai
+│   ├── admin/                    # Portal Khusus Administrator
+│   │   ├── dashboard.html        # Ringkasan metrik platform & grafik analitik
+│   │   └── orders.html           # Manajemen seluruh pesanan & assign mitra
+│   ├── assets/                   # Aset CSS kustom, gambar, dan bootstrap
+│   ├── js/                       # Klien API terpusat & Auth State Manager
+│   │   ├── config.js             # Deteksi otomatis URL API (Local dev vs Cloud Vercel)
+│   │   ├── api.js                # Centralized Fetch wrapper + Bearer token injection
+│   │   ├── auth.js               # Session lifecycle & role-based route guard
+│   │   ├── booking.js            # Logika submit booking ke API cloud
+│   │   ├── customer-orders.js    # Riwayat & real-time polling tracking
+│   │   ├── partner.js            # Alur kerja penerimaan order & status lifecycle
+│   │   └── admin.js              # Manajemen order platform & manual assignment
+│   └── vercel.json               # Konfigurasi routing & header keamanan Vercel
+├── app/                          # Backend Laravel 12 Engine
+│   ├── Http/Controllers/Api/V1/  # REST API Controllers (Auth, Customer, Partner, Admin)
+│   ├── Models/                   # Eloquent Models (Order, User, Service, etc.)
+│   ├── Services/                 # Business logic: PricingService, AssignmentService, PaymentService
+│   └── Middleware/               # EnsureRole, EnsurePartnerVerified, CORS
+├── routes/                       # Rute API (routes/api.php) & Web (routes/web.php)
+├── database/                     # Migrations & Seeders (DemoUser, Service, PricingRule, Order)
+├── tests/Feature/                # PHPUnit automated tests (21 tests, 89 assertions)
+├── vercel.json                   # Root Vercel rewrite configuration
+└── README.md
+```
+
+---
+
+## ⚡ Akun Demo Siap Pakai
+
+Gunakan kredensial berikut untuk menguji seluruh hak akses dan alur kerja:
+
+| Peran (Role) | Email / No. WhatsApp | Password | Fitur yang Dapat Diuji |
+|---|---|---|---|
+| **Pelanggan (Customer)** | `customer@demo.id` *(atau 081234567890)* | `demo123456` | Booking jasa, kalkulasi tarif, pantau live tracking, batalkan pesanan, riwayat order |
+| **Mitra Teknisi (Partner)** | `partner@demo.id` *(atau 081298765432)* | `demo123456` | Terima/tolak order masuk, perbarui status progress pengerjaan, cek saldo pendapatan |
+| **Administrator (Admin)** | `admin@betulinaja.id` *(atau 081200000001)* | `demo123456` | Pantau metrik GMV & komisi platform, monitoring pesanan, penugasan teknisi (*force-assign*) |
+
+---
+
+## 🚀 Panduan Menjalankan Secara Lokal
 
 ### Prasyarat
-1. **PHP:** Versi 8.2 atau lebih tinggi (disarankan via XAMPP / Laragon).
-2. **Composer:** Versi 2.x terpasang di sistem.
+- PHP 8.2+ dengan ekstensi `pdo_mysql`, `openssl`, `mbstring`, `fileinfo`
+- MySQL Server (XAMPP / Laragon / Cloud DB)
+- Composer 2.x
 
-### Langkah Instalasi
-1. Masuk ke direktori project:
-   ```bash
-   cd c:\xampp\htdocs\BetulinAja
-   ```
+### 1. Setup Backend Laravel
+```bash
+# Masuk ke direktori project
+cd c:\xampp\htdocs\BetulinAja
 
-2. Jalankan instalasi dependensi (jika belum terpasang):
-   ```bash
-   composer install
-   ```
+# Instal dependensi composer
+composer install
 
-3. Salin konfigurasi environment & generate application key:
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
+# Siapkan file .env dan generate key
+cp .env.example .env
+php artisan key:generate
 
-4. Jalankan local development server:
-   ```bash
-   php artisan serve
-   ```
-   Aplikasi dapat diakses melalui browser di: **`http://127.0.0.1:8000`** atau melalui Apache XAMPP di **`http://localhost/BetulinAja/public/`**.
+# Jalankan migrasi dan isi database dengan data demo
+php artisan migrate --seed
 
----
+# Jalankan backend API server di port 8000
+php artisan serve
+```
+Backend API aktif di: **`http://127.0.0.1:8000/api/v1`**.
 
-## 3. Daftar Lengkap Halaman & Route
+### 2. Jalankan Frontend
+Buka folder `frontend/` menggunakan browser favorit Anda:
+- Bisa langsung membuka `frontend/index.html`, ATAU
+- Menggunakan VS Code extension **Live Server** (klik *Go Live* pada folder `frontend`), ATAU
+- Menggunakan local web server:
+  ```bash
+  cd frontend
+  php -S 127.0.0.1:5500
+  ```
+Frontend secara otomatis berkomunikasi dengan backend Laravel lokal di `http://127.0.0.1:8000/api/v1`.
 
-### A. Portal Pelanggan (Customer)
-| Halaman | Route URL | Deskripsi |
-|---|---|---|
-| **Beranda (Homepage)** | `/` | Hero section, 8 kategori jasa, 4 keunggulan, 4 langkah cara kerja, teknisi rekomendasi, FAQ, dan CTA |
-| **Katalog Layanan** | `/customer/services` | Daftar lengkap perbaikan dengan filter kategori interaktif (AC, Listrik, Plumbing, dll.) dan live search |
-| **Form Pemesanan (5 Tahap)** | `/customer/booking` | Form wizard: Detail kerusakan & foto, Lokasi & Leaflet Map, Estimasi biaya, Pilih teknisi, Konfirmasi pesanan |
-| **Cek Wilayah Layanan** | `/customer/location` | Peta jangkauan Leaflet dengan radius zona operasional dan pencarian kelurahan/kecamatan |
-| **Kalkulator Estimasi Biaya** | `/customer/estimate` | Simulator mandiri untuk mencoba kombinasi kategori, jarak km, dan tingkat kesulitan dengan kalkulasi seketika |
-| **Direktori Mitra Teknisi** | `/customer/technicians` | Daftar teknisi bersertifikat lengkap dengan filter rating, spesialisasi, dan status ketersediaan |
-| **Konfirmasi Pesanan** | `/customer/confirmation` | Tampilan invoice sukses pasca pemesanan dengan detail invoice dan tombol pelacakan langsung |
-| **Live Tracking Pesanan** | `/customer/tracking` | Pelacakan teknisi real-time di peta Leaflet, timeline status vertikal dengan animasi pulse, serta demo chat & telepon |
-| **Riwayat Pesanan** | `/customer/order-history` | Tab filter pesanan (Semua, Aktif, Selesai, Dibatalkan) dan tombol pesan ulang cepat |
-| **Profil Pengguna** | `/customer/profile` | Kelola profil, verifikasi kontak WhatsApp, dan manajemen daftar alamat tersimpan |
-
-### B. Portal Mitra Teknisi (Partner)
-| Halaman | Route URL | Deskripsi |
-|---|---|---|
-| **Login Mitra** | `/partner/login` | Halaman login teknisi dengan pemberitahuan mode demo one-click |
-| **Dashboard Mitra** | `/partner/dashboard` | Statistik kinerja, toggle Online/Offline interaktif, alert pekerjaan aktif, dan pesanan masuk sekitar |
-| **Pesanan Masuk** | `/partner/orders` | Kartu pesanan baru dengan tombol Terima (Accept) dan Tolak (Reject) disertai notifikasi toast |
-| **Detail Pesanan** | `/partner/order-detail` | Rincian komprehensif kendala pelanggan, foto kerusakan, petunjuk lokasi, dan navigasi GPS |
-| **Pengerjaan Aktif** | `/partner/active-job` | Alur pengerjaan lapangan bertahap (Mulai Perjalanan &rarr; Tiba &rarr; Mulai Kerja &rarr; Upload Foto Sebelum & Sesudah &rarr; Selesaikan) |
-| **Dompet & Pendapatan** | `/partner/earnings` | Rekap saldo komisi (85%), riwayat transaksi harian, dan modal simulasi penarikan dana ke rekening bank |
-| **Profil Mitra** | `/partner/profile` | Profil teknisi, sertifikasi keahlian, radius operasional, dan status verifikasi KTP/SKCK |
-
-### C. Portal Administrator (Admin)
-| Halaman | Route URL | Deskripsi |
-|---|---|---|
-| **Dashboard Utama** | `/admin/dashboard` | 4 kartu metrik utama, grafik tren pesanan Chart.js, diagram lingkaran kategori, dan log aktivitas sistem |
-| **Manajemen Pesanan** | `/admin/orders` | Tabel transaksi interaktif dengan filter status, live search, pagination demo, dan modal detail finansial |
-| **Kelola Mitra Teknisi** | `/admin/technicians` | Direktori mitra dengan status keaktifan, rating, dan tombol aksi verifikasi berkas mitra baru |
-| **Kelola Pelanggan** | `/admin/customers` | Database pelanggan terdaftar, riwayat akumulasi pemesanan, dan total nilai belanja |
-| **Layanan & Kategori** | `/admin/services` | Manajemen katalog jenis perbaikan, tarif acuan dasar, dan modal penambahan layanan baru |
-| **Pengaturan Tarif** | `/admin/pricing` | Pengaturan tarif dasar per kategori, tarif perjalanan per km, surcharge kesulitan, serta live simulator & simpan demo |
-| **Moderasi Ulasan** | `/admin/reviews` | Daftar feedback bintang 1–5 dari pelanggan dengan tombol moderasi tampilkan / sembunyikan |
-| **Laporan & Analitik** | `/admin/reports` | Rekapitulasi metrik finansial platform (GMV, net revenue) dan form unduh laporan periodik (CSV/PDF) |
-| **Pengaturan Sistem** | `/admin/settings` | Pengaturan identitas brand, jam operasional, persentase bagi hasil platform (15%), dan garansi layanan |
+### 3. Menjalankan Automated Tests
+```bash
+php artisan test
+```
+Seluruh 21 test suites (89 assertions) akan dieksekusi dan terverifikasi **100% lulus**.
 
 ---
 
-## 4. Fitur Interaktif Frontend
+## 🌐 Panduan Deployment ke Vercel (Frontend)
 
-Seluruh halaman telah dilengkapi logika JavaScript vanilla tanpa error:
-1. **Multi-Step Booking Wizard:** Validasi tiap langkah, upload multi-foto dengan preview & tombol hapus per-thumbnail, Leaflet draggable marker, tombol "Gunakan Lokasi Saat Ini", dan live cost calculator.
-2. **Kalkulator Biaya Otomatis:** Menghitung `Total = Biaya Dasar + (Jarak km * Tarif/km) + Surcharge Kesulitan`.
-3. **Simulasi Pelacakan & Live Map:** Peta rute Leaflet dengan ikon kendaraan teknisi, tombol *"Simulasikan Status Berikutnya"* untuk menguji seluruh siklus status order, serta modal chat interaktif dengan auto-reply teknisi.
-4. **Alur Kerja Mitra (Active Job):** Tombol aksi bertahap dari meluncur ke lokasi hingga upload bukti foto sebelum & sesudah dan penyelesaian order.
-5. **Chart.js Dinamis:** Grafik garis performa pesanan dan grafik donat distribusi kategori di dashboard admin.
-6. **Toast Notification Engine:** Notifikasi mengambang yang responsif untuk setiap interaksi aksi.
-
----
-
-## 5. Standar Responsivitas Mobile-First
-
-Website dirancang dengan standar responsivitas menyeluruh:
-- **Mobile (< 576px):** Grid kategori 2 kolom, navbar berubah menjadi hamburger menu yang bersih, bottom navigation bar pada portal mitra, offcanvas menu pada admin, tombol target sentuh minimal 44 × 44 px, dan form input 100% lebar tanpa horizontal overflow.
-- **Tablet (576px – 991px):** Grid 3–4 kolom yang seimbang, tata letak kartu rapi.
-- **Desktop (>= 992px):** Sidebar permanen yang elegan (putih pada mitra, dark navy pada admin), tata letak multikolom, dan dropdown portal switcher di navbar utama.
+1. Push repository ke GitHub: `git push origin main`.
+2. Di Dashboard [Vercel](https://vercel.com): Klik **New Project** $\rightarrow$ pilih repo **BetulinAja**.
+3. Atur **Root Directory** ke folder: **`frontend`**.
+4. Tambahkan Environment Variable:
+   - `API_BASE_URL` = `https://api.domain-backend-anda.com/api/v1`
+5. Klik **Deploy**. Website statis Anda langsung aktif di seluruh Edge CDN global Vercel dengan HTTPS.
 
 ---
 
-## 6. Catatan Integrasi Backend Selanjutnya
+## 🛡️ Lisensi & Hak Cipta
 
-Project ini mematuhi instruksi khusus tahap 1:
-- Tidak membuat tabel database MySQL nyata.
-- Tidak membuat autentikasi berbasis session database.
-- Mock data terstruktur rapi pada Blade view dan JavaScript objek sehingga siap digantikan dengan Endpoint Controller, Eloquent Model, dan REST API pada tahap implementasi backend selanjutnya.
+Project ini dikembangkan sebagai karya akademis mahasiswa **Universitas Insan Pembangunan Indonesia (UNIPI)** untuk mata kuliah Komputasi Awan.
+Hak cipta dilindungi undang-undang &copy; 2026 **BetulinAja Inc.**

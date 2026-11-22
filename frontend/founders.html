@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Penemu & Pemilik — BetulinAja (UNIPI)</title>
+  <meta name="description" content="Profil pendiri, penemu ide, dan tim pengembang di balik BetulinAja. Karya orisinil mahasiswa Universitas Insan Pembangunan Indonesia (UNIPI) mata kuliah Komputasi Awan.">
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom App Styles -->
+  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+
+  <style>
+    .founder-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+    }
+    .quote-box {
+      position: relative;
+      background-color: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      font-style: italic;
+    }
+    .architecture-step-card {
+      transition: all 0.25s ease;
+      border: 1.5px solid var(--border-color);
+    }
+    .architecture-step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+  </style>
+
+  <!-- Prevent Theme Flicker -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('betulinaja_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', savedTheme);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ==============================================================
+       NAVBAR UTAMA (RESPONSIVE & DESKTOP)
+       ============================================================== -->
+  <nav class="navbar navbar-expand-lg sticky-top bg-white border-bottom shadow-xs py-2" id="mainNavbar">
+    <div class="container-fluid px-3 px-lg-4">
+      <!-- Brand Logo -->
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark fs-5 py-1" href="index.html">
+        <div class="brand-icon-wrapper d-flex align-items-center justify-content-center bg-primary text-white rounded-3 shadow-xs" style="width: 36px; height: 36px;">
+          <i class="bi bi-tools fs-6"></i>
+        </div>
+        <span>Betulin<span class="brand-highlight">Aja</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="d-none d-lg-flex align-items-center gap-1 mx-auto">
+        <a class="nav-link nav-link-custom px-3 py-2" href="index.html">
+          Beranda
+        </a>
+        <a class="nav-link nav-link-custom px-3 py-2" href="services.html">
+          Layanan
+        </a>
+        <a class="nav-link nav-link-custom px-3 py-2" href="technicians.html">
+          Teknisi
+        </a>
+        <a class="nav-link nav-link-custom px-3 py-2" href="estimate.html">
+          Simulasi Biaya
+        </a>
+        <!-- Dropdown Menu Lainnya -->
+        <div class="dropdown">
+          <a class="nav-link nav-link-custom px-3 py-2 dropdown-toggle active fw-semibold d-flex align-items-center gap-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Lainnya</span>
+          </a>
+          <ul class="dropdown-menu shadow-lg border-0 rounded-3 py-2">
+            <li>
+              <a class="dropdown-item py-2 d-flex align-items-center gap-2 small active" href="founders.html">
+                <i class="bi bi-award-fill text-primary"></i>
+                <span>Profil Pendiri (UNIPI)</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item py-2 d-flex align-items-center gap-2 small" href="location.html">
+                <i class="bi bi-map-fill text-danger"></i>
+                <span>Cek Jangkauan Wilayah</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Controls: Theme Toggle, Auth, Pesan Jasa & Mobile Toggle -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Theme Switcher Button -->
+        <button class="btn btn-outline-custom p-2 d-inline-flex align-items-center justify-content-center touch-target btn-theme-toggle" type="button" title="Ubah Tema (Terang / Gelap)">
+          <i class="bi bi-moon-stars-fill fs-5"></i>
+        </button>
+
+        <!-- Navbar Auth Controls -->
+        <div id="navbar-auth-controls"></div>
+
+        <!-- Tombol CTA Pesan Jasa -->
+        <a href="booking.html" class="btn btn-primary-custom btn-sm px-3 py-2 d-inline-flex align-items-center gap-1 shadow-sm fw-semibold" style="font-size: 0.875rem;">
+          <i class="bi bi-plus-circle"></i>
+          <span>Pesan Jasa</span>
+        </a>
+
+        <!-- Tombol Menu Samping (HANYA MUNCUL DI MOBILE / TABLET < 992px) -->
+        <button class="btn btn-outline-custom p-2 d-inline-flex d-lg-none align-items-center justify-content-center touch-target ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenuSamping" aria-controls="sidebarMenuSamping" title="Buka Menu Samping">
+          <i class="bi bi-list fs-5"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==============================================================
+       OFFCANVAS MENU SAMPING
+       ============================================================== -->
+  <div class="offcanvas offcanvas-end shadow-lg" tabindex="-1" id="sidebarMenuSamping" aria-labelledby="sidebarMenuSampingLabel" style="width: 320px; max-width: 85vw; border-left: 1px solid #e2e8f0;">
+    <div class="offcanvas-header bg-light border-bottom py-3">
+      <div class="d-flex align-items-center gap-2" id="sidebarMenuSampingLabel">
+        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1" style="width: 30px; height: 30px;">
+          <i class="bi bi-tools small"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold mb-0 text-dark">Betulin<span class="text-primary">Aja</span></h6>
+          <span class="text-secondary" style="font-size: 0.72rem;">Menu & Layanan Lengkap</span>
+        </div>
+      </div>
+      <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body p-0 d-flex flex-column justify-content-between">
+      <div class="p-3">
+        <div class="mb-3">
+          <div class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.7rem; letter-spacing: 0.05em;">Navigasi Utama</div>
+          <div class="list-group list-group-flush gap-1">
+            <a href="index.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+              <i class="bi bi-house-door text-primary fs-6"></i>
+              <span>Beranda</span>
+            </a>
+            <a href="services.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+              <i class="bi bi-grid text-primary fs-6"></i>
+              <span>Katalog Layanan</span>
+            </a>
+            <a href="technicians.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+              <i class="bi bi-people text-primary fs-6"></i>
+              <span>Direktori Teknisi</span>
+            </a>
+            <a href="estimate.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+              <i class="bi bi-calculator text-primary fs-6"></i>
+              <span>Simulasi Biaya Service</span>
+            </a>
+            <a href="founders.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-primary fw-semibold active">
+              <i class="bi bi-award-fill text-primary fs-6"></i>
+              <span>Profil Penemu & Pemilik (UNIPI)</span>
+            </a>
+            <a href="order-history.html" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-2 px-2 rounded-2 border-0 text-dark">
+              <i class="bi bi-receipt text-primary fs-6"></i>
+              <span>Pesanan Saya</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.7rem; letter-spacing: 0.05em;">Portal Khusus</div>
+          <div class="d-flex flex-column gap-2">
+            <a href="partner/dashboard.html" class="text-decoration-none p-2 rounded-2 border bg-light d-flex align-items-center justify-content-between hover-card">
+              <div class="d-flex align-items-center gap-2">
+                <div class="bg-success text-white rounded p-1 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                  <i class="bi bi-tools small"></i>
+                </div>
+                <div>
+                  <span class="d-block fw-semibold text-dark small">Portal Mitra Teknisi</span>
+                  <span class="d-block text-muted" style="font-size: 0.72rem;">Pengerjaan & Riwayat</span>
+                </div>
+              </div>
+              <i class="bi bi-chevron-right text-muted small"></i>
+            </a>
+
+            <a href="admin/dashboard.html" class="text-decoration-none p-2 rounded-2 border bg-light d-flex align-items-center justify-content-between hover-card">
+              <div class="d-flex align-items-center gap-2">
+                <div class="bg-danger text-white rounded p-1 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                  <i class="bi bi-shield-lock small"></i>
+                </div>
+                <div>
+                  <span class="d-block fw-semibold text-dark small">Portal Administrator</span>
+                  <span class="d-block text-muted" style="font-size: 0.72rem;">Monitoring & Dispatch</span>
+                </div>
+              </div>
+              <i class="bi bi-chevron-right text-muted small"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3 bg-light border-top mt-auto">
+        <div class="small fw-semibold text-dark">Tim Pengembang (UNIPI):</div>
+        <div class="text-secondary" style="font-size: 0.75rem; line-height: 1.5;">
+          &bull; <strong>Maulana Rizki</strong> (Penemu)<br>
+          &bull; <strong>Iqbal Adityajaya</strong> (Pembuat & Pengembang)<br>
+          &bull; <strong>Sapriadi Sandy</strong> (CEO)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       HERO HEADER SECTION
+       ============================================================== -->
+  <header class="py-5 bg-soft-primary border-bottom">
+    <div class="container text-center py-4">
+      <div class="d-inline-flex align-items-center gap-2 bg-white px-3 py-1.5 rounded-pill border shadow-xs mb-3">
+        <i class="bi bi-mortarboard-fill text-primary"></i>
+        <span class="small fw-semibold text-dark">Universitas Insan Pembangunan Indonesia (UNIPI)</span>
+        <span class="badge bg-primary text-white" style="font-size: 0.7rem;">Komputasi Awan 2026</span>
+      </div>
+      <h1 class="display-5 fw-extrabold text-navy mb-3">
+        Mengenal Penemu & Tim di Balik <span class="text-primary">BetulinAja</span>
+      </h1>
+      <p class="lead text-secondary mx-auto mb-4" style="max-width: 740px;">
+        Solusi digital berbasis komputasi awan yang digagas, dirancang, dan dibangun oleh mahasiswa UNIPI untuk mempertemukan kebutuhan jasa perbaikan rumah tangga dengan para mitra teknisi lokal independen secara transparan, andal, dan bergaransi.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="#founders-section" class="btn btn-primary-custom px-4 py-2.5 shadow-sm fw-semibold">
+          <i class="bi bi-people-fill me-1"></i> Profil 3 Tokoh Utama
+        </a>
+        <a href="#cloud-architecture" class="btn btn-outline-custom px-4 py-2.5 bg-white fw-medium">
+          <i class="bi bi-cloud-arrow-up me-1"></i> Arsitektur Cloud Platform
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==============================================================
+       FOUNDERS PROFILE CARDS SECTION
+       ============================================================== -->
+  <main class="py-5" id="founders-section">
+    <div class="container py-3">
+      <div class="text-center mb-5">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1.5 rounded-pill small fw-semibold text-uppercase">
+          Tim Pendiri & Pengembang
+        </span>
+        <h2 class="fw-bold text-dark mt-2 mb-2">3 Pilar Di Balik BetulinAja</h2>
+        <p class="text-secondary small mx-auto" style="max-width: 600px;">
+          Kolaborasi terstruktur antara konseptor penemu ide, pengembang sistem cloud, dan pimpinan mutu operasional.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- 1. MAULANA RIZKI (PENEMU) -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-custom h-100 p-4 border-0 shadow-sm d-flex flex-column hover-card">
+            <div class="text-center mb-3">
+              <div class="founder-avatar bg-primary text-white mx-auto mb-3">
+                MR
+              </div>
+              <span class="badge bg-warning text-dark px-3 py-1 rounded-pill fw-bold small mb-2">
+                <i class="bi bi-lightbulb-fill me-1"></i> Penemu & Konseptor Platform
+              </span>
+              <h4 class="fw-bold text-dark mb-0">Maulana Rizki</h4>
+              <span class="text-secondary small d-block">Mahasiswa Ilmu Komputer — UNIPI</span>
+            </div>
+
+            <div class="quote-box p-3 mb-3 small text-secondary">
+              <i class="bi bi-quote fs-4 text-primary opacity-50 d-block mb-1"></i>
+              "Berawal dari keresahan mencari teknisi AC dan listrik yang jujur dan bertarif pasti di sekitar lingkungan kampus, saya menggagas ide BetulinAja agar masyarakat terbebas dari markup harga liar serta teknisi lokal memiliki ekosistem order yang teratur."
+            </div>
+
+            <div class="mt-auto">
+              <h6 class="fw-bold text-dark small mb-2"><i class="bi bi-check2-circle text-primary me-1"></i> Peran & Tanggung Jawab:</h6>
+              <ul class="text-secondary small ps-3 mb-3" style="line-height: 1.6;">
+                <li>Penggagas ide orisinil platform marketplace jasa perbaikan.</li>
+                <li>Riset kebutuhan pengguna konsumen dan kendala mitra teknisi.</li>
+                <li>Penyusunan model skema tarif dasar, jangkauan servis, dan simulasi biaya.</li>
+              </ul>
+              <div class="d-flex flex-wrap gap-1">
+                <span class="badge bg-light text-secondary border small">Ideasi Platform</span>
+                <span class="badge bg-light text-secondary border small">Analisis Kebutuhan</span>
+                <span class="badge bg-light text-secondary border small">UX Flow</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. IQBAL ADITYAJAYA (PEMBUAT & PENGEMBANG UTAMA) -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-custom h-100 p-4 border-0 shadow-sm d-flex flex-column hover-card border-top border-primary border-3">
+            <div class="text-center mb-3">
+              <div class="founder-avatar bg-success text-white mx-auto mb-3">
+                IA
+              </div>
+              <span class="badge bg-primary text-white px-3 py-1 rounded-pill fw-bold small mb-2">
+                <i class="bi bi-code-slash me-1"></i> Pembuat & Lead DevOps
+              </span>
+              <h4 class="fw-bold text-dark mb-0">Iqbal Adityajaya</h4>
+              <span class="text-secondary small d-block">Mahasiswa Ilmu Komputer — UNIPI</span>
+            </div>
+
+            <div class="quote-box p-3 mb-3 small text-secondary">
+              <i class="bi bi-quote fs-4 text-success opacity-50 d-block mb-1"></i>
+              "Menghubungkan ide Maulana ke realitas komputasi awan: memisahkan frontend decoupling untuk deploy di edge Vercel, REST API performa tinggi Laravel 12 Sanctum, database cloud MySQL/Postgres, dan testing otomatis dengan 100% kelulusan."
+            </div>
+
+            <div class="mt-auto">
+              <h6 class="fw-bold text-dark small mb-2"><i class="bi bi-check2-circle text-success me-1"></i> Peran & Tanggung Jawab:</h6>
+              <ul class="text-secondary small ps-3 mb-3" style="line-height: 1.6;">
+                <li>Perancang arsitektur REST API, autentikasi Sanctum & skema database.</li>
+                <li>Pengembang frontend decoupling terintegrasi API client terpusat.</li>
+                <li>Insinyur DevOps untuk CI/CD, deployment Vercel & automated testing (21 tests).</li>
+              </ul>
+              <div class="d-flex flex-wrap gap-1">
+                <span class="badge bg-light text-secondary border small">Laravel 12 REST API</span>
+                <span class="badge bg-light text-secondary border small">Vercel Deployment</span>
+                <span class="badge bg-light text-secondary border small">Cloud Database</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. SAPRIADI SANDY (CHIEF EXECUTIVE OFFICER) -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-custom h-100 p-4 border-0 shadow-sm d-flex flex-column hover-card">
+            <div class="text-center mb-3">
+              <div class="founder-avatar bg-navy text-white mx-auto mb-3" style="background-color: #14213D;">
+                SS
+              </div>
+              <span class="badge bg-danger text-white px-3 py-1 rounded-pill fw-bold small mb-2">
+                <i class="bi bi-shield-check me-1"></i> Chief Executive Officer (CEO)
+              </span>
+              <h4 class="fw-bold text-dark mb-0">Sapriadi Sandy</h4>
+              <span class="text-secondary small d-block">Mahasiswa Ilmu Komputer — UNIPI</span>
+            </div>
+
+            <div class="quote-box p-3 mb-3 small text-secondary">
+              <i class="bi bi-quote fs-4 text-danger opacity-50 d-block mb-1"></i>
+              "Kekuatan BetulinAja terletak pada kepercayaan konsumen. Tugas saya sebagai CEO adalah menegakkan standard operating procedure (SOP), menjamin garansi perbaikan 30 hari, serta memvalidasi keahlian dan kepatuhan setiap mitra teknisi kami."
+            </div>
+
+            <div class="mt-auto">
+              <h6 class="fw-bold text-dark small mb-2"><i class="bi bi-check2-circle text-danger me-1"></i> Peran & Tanggung Jawab:</h6>
+              <ul class="text-secondary small ps-3 mb-3" style="line-height: 1.6;">
+                <li>Menentukan visi produk, standar garansi 30 hari & perlindungan pelanggan.</li>
+                <li>Verifikasi mitra teknisi (KTP, keahlian bidang, dan integritas kerja).</li>
+                <li>Pengujian mutu aplikasi (Quality Assurance) dan pengawasan kepuasan pengguna.</li>
+              </ul>
+              <div class="d-flex flex-wrap gap-1">
+                <span class="badge bg-light text-secondary border small">Product Leadership</span>
+                <span class="badge bg-light text-secondary border small">Quality Assurance</span>
+                <span class="badge bg-light text-secondary border small">Mitra Relations</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==============================================================
+       VISI, MISI & NILAI UNGGULAN
+       ============================================================== -->
+  <section class="py-5 bg-light border-top border-bottom">
+    <div class="container py-3">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1.5 rounded-pill small fw-semibold text-uppercase mb-2">
+            Visi & Misi Kami
+          </span>
+          <h2 class="fw-bold text-dark mb-3">Teknologi Awan untuk Kesejahteraan Teknisi Lokal</h2>
+          <p class="text-secondary small mb-4">
+            BetulinAja bukan hanya sekedar tugas kuliah, melainkan prototipe ekosistem nyata yang menjembatani keahlian teknisi independen dengan kebutuhan rumah tangga modern.
+          </p>
+
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-start gap-3">
+              <div class="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 36px; height: 36px;">
+                <i class="bi bi-check-lg fw-bold"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold text-dark mb-1">Transparansi Biaya Mutlak</h6>
+                <p class="text-secondary small mb-0">Semua tarif perbaikan memiliki patokan awal terstandarisasi, menghapus kekhawatiran biaya tak terduga.</p>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="bg-success text-white rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 36px; height: 36px;">
+                <i class="bi bi-shield-lock-fill"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold text-dark mb-1">Garansi Servis Resmi 30 Hari</h6>
+                <p class="text-secondary small mb-0">Setiap order yang diselesaikan dilindungi garansi resmi selama 30 hari tanpa biaya jasa tambahan jika keluhan berulang.</p>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="bg-warning text-dark rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 36px; height: 36px;">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold text-dark mb-1">Pemberdayaan Teknisi Terdekat</h6>
+                <p class="text-secondary small mb-0">Sistem pintar mencocokkan pesanan dengan mitra di radius terdekat guna memangkas waktu tunggu pelanggan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="card card-custom p-4 border-0 shadow-sm bg-white">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-cpu-fill text-primary me-2"></i>Komitmen Mutu & Keamanan Platform</h5>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="p-3 rounded-3 bg-light border">
+                  <div class="fw-bold text-dark small mb-1"><i class="bi bi-person-badge text-primary me-1"></i> Verifikasi KTP & SKCK</div>
+                  <span class="text-muted" style="font-size: 0.75rem;">Setiap mitra teknisi terverifikasi secara manual sebelum diterjunkan ke lapangan.</span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="p-3 rounded-3 bg-light border">
+                  <div class="fw-bold text-dark small mb-1"><i class="bi bi-receipt text-success me-1"></i> Struk & Invoice Resmi</div>
+                  <span class="text-muted" style="font-size: 0.75rem;">Bukti pembayaran sah tercatat di cloud database dan dapat dicetak kapan saja.</span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="p-3 rounded-3 bg-light border">
+                  <div class="fw-bold text-dark small mb-1"><i class="bi bi-lightning-charge text-warning me-1"></i> Real-time Tracking</div>
+                  <span class="text-muted" style="font-size: 0.75rem;">Pelanggan dapat memantau pergerakan teknisi sejak ditugaskan hingga pekerjaan tuntas.</span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="p-3 rounded-3 bg-light border">
+                  <div class="fw-bold text-dark small mb-1"><i class="bi bi-lock-fill text-danger me-1"></i> Enkripsi Data Transaksi</div>
+                  <span class="text-muted" style="font-size: 0.75rem;">Koneksi HTTPS aman dengan proteksi Bearer Token Sanctum pada level REST API.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       ARSITEKTUR KOMPUTASI AWAN (ACADEMIC CORNER)
+       ============================================================== -->
+  <section class="py-5" id="cloud-architecture">
+    <div class="container py-3">
+      <div class="text-center mb-5">
+        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1.5 rounded-pill small fw-semibold text-uppercase">
+          Implementasi Cloud Computing
+        </span>
+        <h2 class="fw-bold text-dark mt-2 mb-2">Arsitektur Komputasi Awan BetulinAja</h2>
+        <p class="text-secondary small mx-auto" style="max-width: 650px;">
+          Sesuai silabus mata kuliah Komputasi Awan UNIPI, aplikasi ini menerapkan <em>Decoupled Modern Cloud Architecture</em> yang memisahkan static edge delivery, REST API processing, dan cloud data persistence.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Layer 1: Vercel Edge CDN -->
+        <div class="col-lg-4">
+          <div class="card architecture-step-card h-100 p-4 rounded-4 bg-white">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-dark text-white px-2 py-1 small">Layer 1: Edge Frontend</span>
+              <i class="bi bi-triangle-fill text-dark fs-5"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-2">Vercel Global Edge CDN</h5>
+            <p class="text-secondary small mb-3">
+              Frontend HTML/CSS/JS di-deploy secara statis di Vercel Root Directory tanpa overhead runtime PHP.
+            </p>
+            <ul class="text-muted small ps-3 mb-0" style="font-size: 0.75rem;">
+              <li>Penyajian instan < 50ms dari server CDN terdekat.</li>
+              <li>Clean URL routing melalui <code>vercel.json</code>.</li>
+              <li>CORS Preflight terhubung aman ke backend REST API.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Layer 2: Laravel Cloud REST API -->
+        <div class="col-lg-4">
+          <div class="card architecture-step-card h-100 p-4 rounded-4 bg-white border-top border-primary border-3">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-primary text-white px-2 py-1 small">Layer 2: Backend API</span>
+              <i class="bi bi-hdd-network text-primary fs-5"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-2">Laravel 12 Cloud API</h5>
+            <p class="text-secondary small mb-3">
+              Backend container menjalankan REST API berstandar JSON API dengan keamanan Laravel Sanctum.
+            </p>
+            <ul class="text-muted small ps-3 mb-0" style="font-size: 0.75rem;">
+              <li>Autentikasi role Pelanggan, Mitra & Administrator.</li>
+              <li>Automated lifecycle dispatching dan status updates.</li>
+              <li>21 automated test suites (89 assertions) lulus 100%.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Layer 3: Persistent Cloud Database -->
+        <div class="col-lg-4">
+          <div class="card architecture-step-card h-100 p-4 rounded-4 bg-white">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-success text-white px-2 py-1 small">Layer 3: Cloud Database</span>
+              <i class="bi bi-database-fill-check text-success fs-5"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-2">Persistent Cloud Database</h5>
+            <p class="text-secondary small mb-3">
+              Basis data cloud persisten (PostgreSQL / MySQL) dengan automated migration dan relasi referensial penuh.
+            </p>
+            <ul class="text-muted small ps-3 mb-0" style="font-size: 0.75rem;">
+              <li>Tabel: <code>users</code>, <code>services</code>, <code>orders</code>, <code>order_status_logs</code>.</li>
+              <li>Foreign key integrity & automated timestamps.</li>
+              <li>Backup database mandiri tersedia di <code>database/betulinaja_backup.sql</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       CTA SECTION
+       ============================================================== -->
+  <section class="py-5 bg-primary text-white text-center">
+    <div class="container py-4">
+      <h2 class="fw-extrabold mb-3">Siap Menggunakan Layanan BetulinAja?</h2>
+      <p class="lead opacity-90 mx-auto mb-4" style="max-width: 600px;">
+        Pesan jasa service AC, pipa bocor, kulkas, atau instalasi listrik dengan jaminan garansi 30 hari sekarang juga!
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="booking.html" class="btn btn-light text-primary px-4 py-2.5 fw-bold shadow-sm">
+          <i class="bi bi-calendar-check me-1"></i> Pesan Jasa Sekarang
+        </a>
+        <a href="services.html" class="btn btn-outline-light px-4 py-2.5 fw-semibold">
+          <i class="bi bi-grid me-1"></i> Lihat Semua Layanan
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       FOOTER UTAMA
+       ============================================================== -->
+  <footer class="bg-white border-top py-5 text-secondary">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="bg-primary text-white rounded-3 p-2 d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+              <i class="bi bi-tools fs-6"></i>
+            </div>
+            <span class="fw-bold fs-5 text-dark">Betulin<span class="text-primary">Aja</span></span>
+          </div>
+          <p class="small text-secondary mb-3">
+            Platform pemesanan jasa service dan perbaikan rumah tangga terpercaya karya mahasiswa <strong>Universitas Insan Pembangunan Indonesia (UNIPI)</strong> untuk mata kuliah Komputasi Awan.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="https://wa.me/6285714310516" target="_blank" class="btn btn-sm btn-outline-custom rounded-circle p-2" title="WhatsApp">
+              <i class="bi bi-whatsapp text-success"></i>
+            </a>
+            <a href="https://github.com" target="_blank" class="btn btn-sm btn-outline-custom rounded-circle p-2" title="GitHub Project">
+              <i class="bi bi-github text-dark"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="fw-bold text-dark mb-3">Navigasi</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0" style="font-size: 0.9rem;">
+            <li><a href="index.html" class="text-secondary text-decoration-none">Beranda</a></li>
+            <li><a href="services.html" class="text-secondary text-decoration-none">Katalog Layanan</a></li>
+            <li><a href="technicians.html" class="text-secondary text-decoration-none">Direktori Teknisi</a></li>
+            <li><a href="estimate.html" class="text-secondary text-decoration-none">Simulasi Biaya</a></li>
+            <li><a href="founders.html" class="text-primary fw-semibold text-decoration-none">Profil Pendiri</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6 class="fw-bold text-dark mb-3">Akses Platform</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0" style="font-size: 0.9rem;">
+            <li><a href="booking.html" class="text-secondary text-decoration-none">Pesan Jasa</a></li>
+            <li><a href="order-history.html" class="text-secondary text-decoration-none">Riwayat Pesanan</a></li>
+            <li><a href="partner/dashboard.html" class="text-secondary text-decoration-none text-success fw-medium"><i class="bi bi-arrow-right-short"></i> Portal Mitra</a></li>
+            <li><a href="admin/dashboard.html" class="text-secondary text-decoration-none text-primary fw-medium"><i class="bi bi-arrow-right-short"></i> Portal Admin</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h6 class="fw-bold text-dark mb-3">Pusat Informasi</h6>
+          <div class="d-flex flex-column gap-2 text-secondary" style="font-size: 0.9rem;">
+            <div><i class="bi bi-telephone text-primary me-2"></i>+62 857-1431-0516 (Iqbal)</div>
+            <div><i class="bi bi-envelope text-primary me-2"></i>bantuan@betulinaja.id</div>
+            <div><i class="bi bi-geo-alt text-danger me-2"></i>Kampus UNIPI, Tangerang, Banten</div>
+            <div><i class="bi bi-clock text-secondary me-2"></i>07.00 - 21.00 WIB</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 border-top d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3 text-secondary" style="font-size: 0.85rem;">
+        <div>
+          &copy; 2026 <strong>BetulinAja Inc.</strong> &bull; Universitas Insan Pembangunan Indonesia (UNIPI).
+        </div>
+        <div class="text-center text-lg-end text-muted">
+          <span>Tim Pengembang: </span>
+          <strong class="text-dark">Maulana Rizki</strong> (Penemu), 
+          <strong class="text-dark">Iqbal Adityajaya</strong> (Pembuat), 
+          <strong class="text-dark">Sapriadi Sandy</strong> (CEO)
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core API & Auth Clients -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+
+  <!-- Global App JS -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

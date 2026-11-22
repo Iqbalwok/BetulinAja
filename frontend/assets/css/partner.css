@@ -1,0 +1,205 @@
+/* ==========================================================================
+   BetulinAja — Partner (Mitra Teknisi) CSS
+   ========================================================================== */
+
+.partner-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Partner Sidebar Desktop */
+.partner-sidebar {
+  width: 260px;
+  background-color: #FFFFFF;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+}
+
+.partner-sidebar-brand {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.partner-nav {
+  padding: 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-grow: 1;
+}
+
+.partner-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-decoration: none;
+  min-height: var(--touch-target);
+  transition: all 0.15s ease;
+}
+
+.partner-nav-link:hover {
+  background-color: var(--bg-body);
+  color: var(--primary);
+}
+
+.partner-nav-link.active {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.partner-nav-link i {
+  font-size: 1.2rem;
+}
+
+/* Partner Content Area */
+.partner-main {
+  flex-grow: 1;
+  background-color: var(--bg-body);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.partner-topbar {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.85rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+/* Online / Offline Switch Component */
+.status-toggle-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  background-color: #FFFFFF;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-subtle);
+}
+
+.custom-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.custom-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-round {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #CBD5E1;
+  transition: .3s;
+  border-radius: 34px;
+}
+
+.slider-round:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider-round {
+  background-color: var(--accent-green);
+}
+
+input:checked + .slider-round:before {
+  transform: translateX(24px);
+}
+
+/* Job Flow Actions */
+.workflow-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Bottom Nav for Mobile */
+.partner-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  z-index: 1000;
+  box-shadow: 0 -4px 15px rgba(20, 33, 61, 0.05);
+}
+
+.bottom-nav-item {
+  flex: 1;
+  text-align: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.35rem 0;
+}
+
+.bottom-nav-item i {
+  font-size: 1.25rem;
+}
+
+.bottom-nav-item.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Responsive Overrides */
+@media (max-width: 991px) {
+  .partner-sidebar {
+    display: none;
+  }
+  
+  .partner-bottom-nav {
+    display: flex;
+  }
+  
+  .partner-main {
+    padding-bottom: 4.5rem; /* space for bottom nav */
+  }
+  
+  .partner-topbar {
+    padding: 0.75rem 1rem;
+  }
+}
