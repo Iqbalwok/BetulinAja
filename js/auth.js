@@ -45,10 +45,12 @@ const Auth = (function() {
 
   async function register(payload) {
     const res = await ApiClient.post('/auth/register', payload);
-    if (res.success && res.data?.token) {
-      localStorage.setItem(CONFIG.STORAGE_KEYS.TOKEN, res.data.token);
-      localStorage.setItem(CONFIG.STORAGE_KEYS.USER, JSON.stringify(res.data.user));
-      localStorage.setItem(CONFIG.STORAGE_KEYS.ROLE, res.data.user.role);
+    if (res.success) {
+      if (res.data?.token) {
+        localStorage.setItem(CONFIG.STORAGE_KEYS.TOKEN, res.data.token);
+        localStorage.setItem(CONFIG.STORAGE_KEYS.USER, JSON.stringify(res.data.user));
+        localStorage.setItem(CONFIG.STORAGE_KEYS.ROLE, res.data.user.role);
+      }
       return res.data;
     }
     throw new Error(res.message || 'Registrasi gagal.');

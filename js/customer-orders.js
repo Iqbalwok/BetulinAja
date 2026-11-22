@@ -112,6 +112,15 @@ async function loadCustomerOrderHistory(statusFilter = '') {
                   <button class="btn btn-sm btn-outline-success px-3 fw-semibold" onclick="printOrderInvoice(${order.id})">
                     <i class="bi bi-printer me-1"></i> Cetak Invoice
                   </button>
+                  ${!order.review ? `
+                    <button class="btn btn-sm btn-warning text-dark px-3 fw-semibold" onclick="customerReviewOrder(${order.id}, '${(order.partner?.name || 'Teknisi').replace(/'/g, "\\'")}')">
+                      <i class="bi bi-star-fill me-1"></i> Beri Ulasan
+                    </button>
+                  ` : `
+                    <span class="badge bg-success-subtle text-success small py-1.5 px-2 d-inline-flex align-items-center gap-1">
+                      <i class="bi bi-check-circle-fill"></i> Sudah Diulas (${order.review.rating}★)
+                    </span>
+                  `}
                 ` : ''}
                 <a href="tracking.html?id=${order.id}" class="btn btn-sm btn-primary-custom px-3 fw-semibold">
                   <i class="bi bi-geo-alt me-1"></i> Lacak Status
@@ -125,6 +134,32 @@ async function loadCustomerOrderHistory(statusFilter = '') {
 
   } catch (err) {
     container.innerHTML = `<div class="alert alert-danger">Gagal memuat pesanan: ${err.message}</div>`;
+  }
+}
+
+async function customerReviewOrder(orderId, partnerName) {
+  const ratingStr = prompt(`Beri rating untuk teknisi ${partnerName} (1 sampai 5 bintang):`, '5');
+  if (!ratingStr) return;
+  const rating = parseInt(ratingStr, 10);
+  if (isNaN(rating) || rating < 1 || rating > 5) {
+    ApiClient.showToast('Rating Tidak Valid', 'Silakan masukkan angka antara 1 sampai 5.', 'warning');
+    return;
+  }
+
+  const comment = prompt(`Tulis ulasan pengalaman Anda dengan teknisi ${partnerName}:`, 'Pekerjaan sangat rapi, teknisi tepat waktu dan ramah.');
+  if (comment === null) return;
+
+  try {
+    await ApiClient.post('/reviews', {
+      order_id: orderId,
+      rating: rating,
+      comment: comment || 'Sangat puas dengan pelayanan teknisi.',
+    });
+
+    ApiClient.showToast('Ulasan Terkirim', `Terima kasih! Ulasan bintang ${rating} untuk ${partnerName} berhasil disimpan.`, 'success', 3500);
+    loadCustomerOrderHistory();
+  } catch (err) {
+    ApiClient.showToast('Gagal Mengirim Ulasan', err.message || 'Terjadi kesalahan saat menyimpan ulasan.', 'danger');
   }
 }
 
@@ -373,4 +408,5 @@ function renderTrackingDashboard(order) {
 
 window.loadCustomerOrderHistory = loadCustomerOrderHistory;
 window.customerCancelOrder = customerCancelOrder;
+window.customerReviewOrder = customerReviewOrder;
 window.fetchAndRenderTracking = fetchAndRenderTracking;

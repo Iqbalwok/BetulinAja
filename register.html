@@ -276,8 +276,18 @@
 
       try {
         const data = await Auth.register(payload);
-        ApiClient.showToast('Registrasi Berhasil', `Selamat datang, ${data.user.name}! Akun Anda telah siap.`, 'success', 2500);
 
+        if (data.needs_verification) {
+          ApiClient.showToast('Registrasi Berhasil', 'Kode OTP telah dikirimkan ke email Anda. Silakan verifikasi akun.', 'success', 2500);
+          setTimeout(() => {
+            const emailParam = encodeURIComponent(payload.email);
+            const maskedParam = encodeURIComponent(data.masked_email || '');
+            window.location.href = `verify-email.html?email=${emailParam}&masked=${maskedParam}`;
+          }, 1000);
+          return;
+        }
+
+        ApiClient.showToast('Registrasi Berhasil', `Selamat datang, ${data.user.name}! Akun Anda telah siap.`, 'success', 2500);
         setTimeout(() => {
           if (data.user.role === 'partner') {
             window.location.href = 'partner/dashboard.html';

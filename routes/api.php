@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\ProfileController;
+use App\Http\Controllers\Api\V1\Auth\OtpController;
 
 // Public & Customer Controllers
 use App\Http\Controllers\Api\V1\CategoryController;
@@ -96,6 +97,10 @@ Route::prefix('v1')->group(function () {
     Route::middleware('throttle:auth')->group(function () {
         Route::post('/auth/register', [RegisterController::class, 'register']);
         Route::post('/auth/login', [LoginController::class, 'login']);
+        Route::post('/auth/verify-otp', [OtpController::class, 'verifyOtp']);
+        Route::post('/auth/resend-otp', [OtpController::class, 'resendOtp']);
+        Route::post('/auth/forgot-password', [OtpController::class, 'forgotPassword']);
+        Route::post('/auth/reset-password', [OtpController::class, 'resetPassword']);
     });
 
     Route::middleware('throttle:api')->group(function () {

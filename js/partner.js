@@ -82,7 +82,10 @@ async function loadPartnerDashboard() {
         statusSelect.value = data.partner_profile.availability_status || 'online';
         statusSelect.addEventListener('change', async function() {
           try {
-            await ApiClient.post('/partner/status', { status: this.value });
+            await ApiClient.post('/partner/status', { 
+              availability_status: this.value,
+              status: this.value 
+            });
             ApiClient.showToast('Status Diperbarui', `Status Anda sekarang: ${this.value.toUpperCase()}`, 'success');
           } catch (e) {
             ApiClient.showToast('Gagal Ubah Status', e.message, 'danger');

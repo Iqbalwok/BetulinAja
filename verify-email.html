@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Email — BetulinAja</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Application CSS -->
+  <link rel="stylesheet" href="assets/css/app.css">
+  <style>
+    .otp-input-field {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 2.2rem;
+      letter-spacing: 12px;
+      text-align: center;
+      font-weight: 800;
+      color: var(--primary, #2563EB);
+      background-color: var(--surface, #FFFFFF);
+      border: 2px solid var(--border-color, #CBD5E1);
+      border-radius: 14px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+    }
+    .otp-input-field:focus {
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="bg-body d-flex flex-column min-vh-100">
+
+  <div class="d-flex flex-column flex-grow-1">
+    <!-- Header -->
+    <header class="p-3 border-bottom bg-white">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand navbar-brand-logo py-0 text-decoration-none" href="index.html">
+          <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1 shadow-sm" style="width: 32px; height: 32px;">
+            <i class="bi bi-tools fs-6"></i>
+          </div>
+          <span>Betulin<span class="brand-highlight">Aja</span></span>
+        </a>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-custom p-2 d-inline-flex align-items-center justify-content-center touch-target btn-theme-toggle" type="button" title="Ubah Tema">
+            <i class="bi bi-moon-stars-fill fs-5"></i>
+          </button>
+          <a href="login.html" class="btn btn-outline-custom btn-sm px-3 py-1.5">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Masuk
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="my-auto py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-5">
+            <div class="card card-custom p-4 p-sm-5 border-0 shadow-sm bg-white rounded-4 text-center">
+              
+              <!-- Icon Header -->
+              <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary mx-auto mb-3" style="width: 64px; height: 64px;">
+                <i class="bi bi-shield-check fs-2"></i>
+              </div>
+
+              <h3 class="fw-bold text-dark mb-1">Verifikasi Email Anda</h3>
+              <p class="text-secondary small mb-2">
+                Kami telah mengirimkan 6-digit kode OTP ke alamat email:
+              </p>
+              <div class="mb-4">
+                <span id="display-masked-email" class="badge bg-light text-primary border px-3 py-2 fs-6 fw-semibold rounded-pill">
+                  memuat email...
+                </span>
+              </div>
+
+              <!-- Error Alert -->
+              <div id="otp-error-alert" class="alert alert-danger py-2 px-3 small border-0 d-none mb-3 text-start" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                <span id="otp-error-text">Kode OTP salah.</span>
+              </div>
+
+              <!-- Success Alert -->
+              <div id="otp-success-alert" class="alert alert-success py-2 px-3 small border-0 d-none mb-3 text-start" role="alert">
+                <i class="bi bi-check-circle-fill me-1"></i>
+                <span id="otp-success-text">Kode OTP berhasil diverifikasi!</span>
+              </div>
+
+              <!-- Form OTP -->
+              <form id="otp-form" class="mb-3">
+                <div class="mb-3">
+                  <input type="text" id="otp-input" class="form-control otp-input-field" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" placeholder="••••••" autofocus required autocomplete="one-time-code">
+                  <div class="form-text small mt-2">
+                    <span class="text-muted">Masa berlaku kode: </span>
+                    <strong id="timer-display" class="text-warning fw-bold">05:00</strong>
+                  </div>
+                </div>
+
+                <button type="submit" id="btn-submit-otp" class="btn btn-primary-custom w-100 py-2.5 fw-semibold shadow-sm mb-3">
+                  <span id="btn-otp-spinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                  <span id="btn-otp-text"><i class="bi bi-check-lg me-1"></i> Verifikasi Sekarang</span>
+                </button>
+              </form>
+
+              <!-- Resend Section -->
+              <div class="p-3 bg-light rounded-3 border mb-3">
+                <p class="small text-secondary mb-2">Tidak menerima kode di kotak masuk maupun folder spam?</p>
+                <button type="button" id="btn-resend-otp" class="btn btn-outline-custom btn-sm px-3 py-1.5 fw-semibold" onclick="handleResendOtp()" disabled>
+                  <span id="btn-resend-spinner" class="spinner-border spinner-border-sm me-1 d-none"></span>
+                  <span id="btn-resend-text">Kirim Ulang Kode (<span id="resend-countdown">60</span>s)</span>
+                </button>
+              </div>
+
+              <!-- Footer Back link -->
+              <div class="pt-2 border-top">
+                <span class="text-secondary small">Salah alamat email?</span>
+                <a href="register.html" class="text-primary fw-semibold small text-decoration-none ms-1">Daftar Ulang</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-3 text-center text-secondary small border-top bg-white">
+      &copy; 2026 <strong>BetulinAja Inc.</strong> &bull; Universitas Insan Pembangunan Indonesia (UNIPI)
+    </footer>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/api/env.js" onerror="/* static fallback */"></script>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetEmail = urlParams.get('email') || '';
+    const maskedParam = urlParams.get('masked') || '';
+
+    if (!targetEmail) {
+      alert('Parameter email tidak ditemukan. Anda akan diarahkan ke halaman pendaftaran.');
+      window.location.href = 'register.html';
+    }
+
+    // Mask helper
+    function maskEmailLocal(email) {
+      const parts = email.split('@');
+      if (parts.length !== 2) return email;
+      const name = parts[0];
+      const domain = parts[1];
+      const maskedName = name.length <= 2 ? name[0] + '***' : name.slice(0, 3) + '***';
+      return maskedName + '@' + domain;
+    }
+
+    document.getElementById('display-masked-email').textContent = maskedParam || maskEmailLocal(targetEmail);
+
+    // Expiry Countdown (5 minutes = 300 seconds)
+    let expirySeconds = 300;
+    const timerDisplay = document.getElementById('timer-display');
+    const expiryInterval = setInterval(() => {
+      expirySeconds--;
+      if (expirySeconds <= 0) {
+        clearInterval(expiryInterval);
+        timerDisplay.textContent = 'Kedaluwarsa';
+        timerDisplay.className = 'text-danger fw-bold';
+        document.getElementById('btn-submit-otp').disabled = true;
+        document.getElementById('otp-error-text').textContent = 'Kode OTP telah kedaluwarsa. Silakan klik tombol kirim ulang kode.';
+        document.getElementById('otp-error-alert').classList.remove('d-none');
+        return;
+      }
+      const mins = String(Math.floor(expirySeconds / 60)).padStart(2, '0');
+      const secs = String(expirySeconds % 60).padStart(2, '0');
+      timerDisplay.textContent = `${mins}:${secs}`;
+    }, 1000);
+
+    // Resend Cooldown (60 seconds)
+    let resendSeconds = 60;
+    const resendBtn = document.getElementById('btn-resend-otp');
+    const resendCountdown = document.getElementById('resend-countdown');
+    const resendText = document.getElementById('btn-resend-text');
+
+    const resendInterval = setInterval(() => {
+      resendSeconds--;
+      if (resendSeconds <= 0) {
+        clearInterval(resendInterval);
+        resendBtn.disabled = false;
+        resendText.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i> Kirim Ulang Kode OTP';
+        return;
+      }
+      resendCountdown.textContent = resendSeconds;
+    }, 1000);
+
+    // Handle Resend OTP
+    async function handleResendOtp() {
+      resendBtn.disabled = true;
+      document.getElementById('btn-resend-spinner').classList.remove('d-none');
+
+      try {
+        const res = await ApiClient.post('/auth/resend-otp', {
+          email: targetEmail,
+          type: 'registration'
+        });
+
+        if (res.success) {
+          ApiClient.showToast('Kode OTP Terkirim', 'Kode OTP baru telah dikirimkan ke email Anda.', 'success');
+          // Reset expiry
+          expirySeconds = 300;
+          document.getElementById('btn-submit-otp').disabled = false;
+          document.getElementById('otp-error-alert').classList.add('d-none');
+
+          // Reset 60s cooldown
+          resendSeconds = 60;
+          resendText.innerHTML = 'Kirim Ulang Kode (<span id="resend-countdown">60</span>s)';
+          const newInterval = setInterval(() => {
+            resendSeconds--;
+            const cdEl = document.getElementById('resend-countdown');
+            if (cdEl) cdEl.textContent = resendSeconds;
+            if (resendSeconds <= 0) {
+              clearInterval(newInterval);
+              resendBtn.disabled = false;
+              resendText.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i> Kirim Ulang Kode OTP';
+            }
+          }, 1000);
+        } else {
+          throw new Error(res.message || 'Gagal mengirim ulang OTP.');
+        }
+      } catch (err) {
+        ApiClient.showToast('Gagal Kirim Ulang', err.message, 'danger');
+        resendBtn.disabled = false;
+      } finally {
+        document.getElementById('btn-resend-spinner').classList.add('d-none');
+      }
+    }
+
+    // Handle Submit OTP
+    document.getElementById('otp-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const otpCode = document.getElementById('otp-input').value.trim();
+
+      if (otpCode.length !== 6) {
+        alert('Harap masukkan tepat 6 digit kode OTP.');
+        return;
+      }
+
+      const submitBtn = document.getElementById('btn-submit-otp');
+      const spinner = document.getElementById('btn-otp-spinner');
+      const btnText = document.getElementById('btn-otp-text');
+      const errAlert = document.getElementById('otp-error-alert');
+      const errText = document.getElementById('otp-error-text');
+      const successAlert = document.getElementById('otp-success-alert');
+
+      errAlert.classList.add('d-none');
+      successAlert.classList.add('d-none');
+      submitBtn.disabled = true;
+      spinner.classList.remove('d-none');
+      btnText.textContent = 'Memverifikasi...';
+
+      try {
+        const res = await ApiClient.post('/auth/verify-otp', {
+          email: targetEmail,
+          otp: otpCode,
+          type: 'registration'
+        });
+
+        if (res.success) {
+          successAlert.classList.remove('d-none');
+          document.getElementById('otp-success-text').textContent = res.message || 'Verifikasi email berhasil!';
+          
+          if (res.data?.token) {
+            localStorage.setItem(CONFIG.STORAGE_KEYS.TOKEN, res.data.token);
+            localStorage.setItem(CONFIG.STORAGE_KEYS.USER, JSON.stringify(res.data.user));
+            localStorage.setItem(CONFIG.STORAGE_KEYS.ROLE, res.data.user.role);
+          }
+
+          ApiClient.showToast('Verifikasi Berhasil', 'Akun Anda telah aktif. Mengarahkan ke aplikasi...', 'success', 2000);
+
+          setTimeout(() => {
+            const role = res.data?.user?.role || 'customer';
+            if (role === 'partner') {
+              window.location.href = 'partner/dashboard.html';
+            } else if (role === 'admin') {
+              window.location.href = 'admin/dashboard.html';
+            } else {
+              window.location.href = 'index.html';
+            }
+          }, 1500);
+          return;
+        }
+
+        throw new Error(res.message || 'Verifikasi gagal.');
+
+      } catch (err) {
+        errAlert.classList.remove('d-none');
+        errText.textContent = err.message || 'Kode OTP tidak cocok atau telah kedaluwarsa.';
+        ApiClient.showToast('Verifikasi Gagal', err.message, 'danger');
+      } finally {
+        submitBtn.disabled = false;
+        spinner.classList.add('d-none');
+        btnText.innerHTML = '<i class="bi bi-check-lg me-1"></i> Verifikasi Sekarang';
+      }
+    });
+  </script>
+</body>
+</html>

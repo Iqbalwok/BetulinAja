@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="Masuk ke Akun BetulinAja — Solusi Service &amp; Perbaikan Rumah Terpercaya.">
-  <meta name="theme-color" content="#2563EB">
-  <title>Masuk — BetulinAja</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk ke Akun — BetulinAja</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,26 +17,30 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <!-- Core App CSS -->
+  <!-- Custom Application CSS -->
   <link rel="stylesheet" href="assets/css/app.css">
-  <link rel="stylesheet" href="assets/css/customer.css">
 </head>
-<body class="bg-light">
+<body class="bg-body d-flex flex-column min-vh-100">
 
-  <div class="min-vh-100 d-flex flex-column justify-content-between">
-    <!-- Header -->
-    <header class="p-3 border-bottom bg-white sticky-top">
-      <div class="container d-flex align-items-center justify-content-between">
-        <a class="navbar-brand navbar-brand-logo py-0" href="index.html">
+  <!-- Wrapper Flex -->
+  <div class="d-flex flex-column flex-grow-1">
+    <!-- Simple Auth Header -->
+    <header class="p-3 border-bottom bg-white">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand navbar-brand-logo py-0 text-decoration-none" href="index.html">
           <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 p-1 shadow-sm" style="width: 32px; height: 32px;">
             <i class="bi bi-tools fs-6"></i>
           </div>
           <span>Betulin<span class="brand-highlight">Aja</span></span>
         </a>
-        <a href="index.html" class="btn btn-outline-custom btn-sm">
-          <i class="bi bi-arrow-left me-1"></i> Ke Beranda
-        </a>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-custom p-2 d-inline-flex align-items-center justify-content-center touch-target btn-theme-toggle" type="button" title="Ubah Tema">
+            <i class="bi bi-moon-stars-fill fs-5"></i>
+          </button>
+          <a href="index.html" class="btn btn-outline-custom btn-sm px-3 py-1.5">
+            <i class="bi bi-arrow-left me-1"></i> Beranda
+          </a>
+        </div>
       </div>
     </header>
 
@@ -46,28 +51,15 @@
           <div class="col-12 col-md-8 col-lg-5">
             <div class="card card-custom p-4 p-sm-5 border-0 shadow-sm bg-white rounded-4">
               <div class="text-center mb-4">
-                <span class="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-semibold small mb-2 d-inline-block">Autentikasi Terpadu</span>
+                <span class="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-semibold small mb-2 d-inline-block">Portal Autentikasi Resmi</span>
                 <h3 class="fw-bold text-dark mb-1">Masuk ke Akun</h3>
-                <p class="text-secondary small">Pilih peran akun atau gunakan akun demo siap pakai.</p>
+                <p class="text-secondary small">Masuk untuk mengakses layanan pemesanan dan dashboard Anda.</p>
               </div>
 
-              <!-- Quick Demo Selector Tabs -->
-              <div class="d-flex bg-light p-1 rounded-3 mb-4 border">
-                <button type="button" class="btn btn-sm flex-fill fw-semibold role-tab active" data-role="customer" onclick="setDemoAccount('customer')">
-                  Pelanggan
-                </button>
-                <button type="button" class="btn btn-sm flex-fill fw-semibold text-secondary role-tab" data-role="partner" onclick="setDemoAccount('partner')">
-                  Mitra Teknisi
-                </button>
-                <button type="button" class="btn btn-sm flex-fill fw-semibold text-secondary role-tab" data-role="admin" onclick="setDemoAccount('admin')">
-                  Admin
-                </button>
-              </div>
-
-              <!-- Inline Alert for Errors -->
+              <!-- Inline Alert for Errors / Verification Notice -->
               <div id="login-error-alert" class="alert alert-danger py-2 px-3 small border-0 d-none mb-3" role="alert">
                 <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                <span id="login-error-text">Email atau password salah.</span>
+                <span id="login-error-text">Email atau kata sandi salah.</span>
               </div>
 
               <!-- Login Form -->
@@ -76,18 +68,18 @@
                   <label class="form-label small fw-semibold text-dark">Email atau Nomor WhatsApp</label>
                   <div class="input-group">
                     <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-person"></i></span>
-                    <input type="text" id="login-input" class="form-control border-start-0" placeholder="contoh: customer@demo.id / 081234567890" required value="customer@demo.id">
+                    <input type="text" id="login-input" class="form-control border-start-0" placeholder="nama@email.com atau 08xxxxxxxxxx" required autocomplete="username">
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <div class="d-flex justify-content-between align-items-center mb-1">
                     <label class="form-label small fw-semibold text-dark mb-0">Kata Sandi</label>
-                    <a href="javascript:void(0)" class="text-decoration-none small text-primary" onclick="alert('Untuk pengujian: Gunakan password demo demo123456')">Lupa Sandi?</a>
+                    <a href="forgot-password.html" class="text-decoration-none small text-primary fw-medium">Lupa Sandi?</a>
                   </div>
                   <div class="input-group">
                     <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-lock"></i></span>
-                    <input type="password" id="password-input" class="form-control border-start-0 border-end-0" placeholder="Masukkan kata sandi" required value="demo123456">
+                    <input type="password" id="password-input" class="form-control border-start-0 border-end-0" placeholder="Masukkan kata sandi" required autocomplete="current-password">
                     <button class="btn btn-outline-secondary border-start-0 text-muted" type="button" id="btn-toggle-pwd" onclick="togglePasswordVisibility()">
                       <i class="bi bi-eye" id="toggle-pwd-icon"></i>
                     </button>
@@ -107,27 +99,8 @@
                 </button>
               </form>
 
-              <!-- One-Click Demo Box -->
-              <div class="card border border-primary-subtle bg-soft-primary p-3 rounded-3 mb-3">
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <i class="bi bi-lightning-charge-fill text-warning"></i>
-                  <span class="fw-bold small text-dark">Akses Demo Pengujian Instan:</span>
-                </div>
-                <div class="d-flex flex-wrap gap-1.5">
-                  <button type="button" class="btn btn-sm btn-outline-primary bg-white text-primary flex-fill small py-1" onclick="quickFill('customer@demo.id', 'demo123456', 'customer')">
-                    <i class="bi bi-person me-1"></i> Pelanggan
-                  </button>
-                  <button type="button" class="btn btn-sm btn-outline-success bg-white text-success flex-fill small py-1" onclick="quickFill('partner@demo.id', 'demo123456', 'partner')">
-                    <i class="bi bi-tools me-1"></i> Mitra
-                  </button>
-                  <button type="button" class="btn btn-sm btn-outline-danger bg-white text-danger flex-fill small py-1" onclick="quickFill('admin@betulinaja.id', 'demo123456', 'admin')">
-                    <i class="bi bi-shield-lock me-1"></i> Admin
-                  </button>
-                </div>
-              </div>
-
               <!-- Footer link -->
-              <div class="text-center pt-2 border-top">
+              <div class="text-center pt-3 border-top">
                 <span class="text-secondary small">Belum punya akun?</span>
                 <a href="register.html" class="text-primary fw-semibold small text-decoration-none ms-1">Daftar Sekarang</a>
               </div>
@@ -148,40 +121,13 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/api/env.js" onerror="/* static fallback */"></script>
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/theme.js"></script>
 
   <script>
-    const DEMO_ACCOUNTS = {
-      customer: { login: 'customer@demo.id', pass: 'demo123456' },
-      partner: { login: 'partner@demo.id', pass: 'demo123456' },
-      admin: { login: 'admin@betulinaja.id', pass: 'demo123456' }
-    };
-
-    function setDemoAccount(role) {
-      document.querySelectorAll('.role-tab').forEach(tab => {
-        const isTarget = tab.dataset.role === role;
-        tab.classList.toggle('active', isTarget);
-        tab.classList.toggle('text-secondary', !isTarget);
-        tab.classList.toggle('btn-primary-custom', isTarget);
-      });
-
-      const creds = DEMO_ACCOUNTS[role];
-      if (creds) {
-        document.getElementById('login-input').value = creds.login;
-        document.getElementById('password-input').value = creds.pass;
-      }
-    }
-
-    function quickFill(login, pass, role) {
-      setDemoAccount(role);
-      document.getElementById('login-input').value = login;
-      document.getElementById('password-input').value = pass;
-      ApiClient.showToast('Kredensial Demo Terpasang', `Login sebagai ${role}`, 'info');
-    }
-
     function togglePasswordVisibility() {
       const input = document.getElementById('password-input');
       const icon = document.getElementById('toggle-pwd-icon');
@@ -194,25 +140,7 @@
       }
     }
 
-    // Check query param for preselected role
-    document.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const roleParam = urlParams.get('role');
-      if (roleParam && DEMO_ACCOUNTS[roleParam]) {
-        setDemoAccount(roleParam);
-      } else {
-        setDemoAccount('customer');
-      }
-
-      // If already logged in, redirect
-      if (Auth.isAuthenticated()) {
-        const user = Auth.getUser();
-        if (user.role === 'admin') window.location.href = 'admin/dashboard.html';
-        else if (user.role === 'partner') window.location.href = 'partner/dashboard.html';
-        else window.location.href = 'order-history.html';
-      }
-    });
-
+    // Handle Form Submit
     document.getElementById('login-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const login = document.getElementById('login-input').value.trim();
@@ -230,28 +158,64 @@
       btnText.textContent = 'Memverifikasi...';
 
       try {
-        const data = await Auth.login(login, password);
-        ApiClient.showToast('Login Berhasil', `Selamat datang kembali, ${data.user.name}!`, 'success', 2000);
+        const res = await ApiClient.post('/auth/login', {
+          login: login,
+          password: password,
+          device_name: 'browser_web'
+        });
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const returnUrl = urlParams.get('returnUrl');
+        if (res.success && res.data?.token) {
+          localStorage.setItem(CONFIG.STORAGE_KEYS.TOKEN, res.data.token);
+          localStorage.setItem(CONFIG.STORAGE_KEYS.USER, JSON.stringify(res.data.user));
+          localStorage.setItem(CONFIG.STORAGE_KEYS.ROLE, res.data.user.role);
 
-        setTimeout(() => {
-          if (returnUrl) {
-            window.location.href = decodeURIComponent(returnUrl);
-          } else if (data.user.role === 'admin') {
-            window.location.href = 'admin/dashboard.html';
-          } else if (data.user.role === 'partner') {
-            window.location.href = 'partner/dashboard.html';
-          } else {
-            window.location.href = 'order-history.html';
-          }
-        }, 1000);
+          ApiClient.showToast('Login Berhasil', `Selamat datang kembali, ${res.data.user.name}!`, 'success', 2000);
+
+          setTimeout(() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnUrl = urlParams.get('returnUrl');
+            if (returnUrl) {
+              window.location.href = decodeURIComponent(returnUrl);
+              return;
+            }
+
+            if (res.data.user.role === 'admin') {
+              window.location.href = 'admin/dashboard.html';
+            } else if (res.data.user.role === 'partner') {
+              window.location.href = 'partner/dashboard.html';
+            } else {
+              window.location.href = 'index.html';
+            }
+          }, 1000);
+          return;
+        }
+
+        throw new Error(res.message || 'Login gagal.');
 
       } catch (err) {
-        errAlert.classList.remove('d-none');
-        errText.textContent = err.message || 'Gagal masuk. Periksa kembali email dan kata sandi Anda.';
-        ApiClient.showToast('Login Gagal', err.message, 'danger');
+        // Check if unverified email (needs OTP verification)
+        const errData = err.data || {};
+        if (errData.needs_verification || (err.message && err.message.toLowerCase().includes('verifikasi'))) {
+          const targetEmail = errData.email || (login.includes('@') ? login : '');
+          errAlert.className = 'alert alert-warning py-2.5 px-3 small border-0 mb-3';
+          errAlert.innerHTML = `
+            <div class="d-flex align-items-start gap-2">
+              <i class="bi bi-shield-exclamation fs-5 flex-shrink-0 text-warning"></i>
+              <div>
+                <strong class="d-block">Email Belum Terverifikasi</strong>
+                <span>${err.message || 'Silakan masukkan kode OTP yang telah dikirimkan ke email Anda.'}</span>
+                <a href="verify-email.html?email=${encodeURIComponent(targetEmail)}" class="btn btn-sm btn-warning text-dark fw-bold mt-2 d-inline-flex align-items-center gap-1">
+                  Verifikasi Sekarang <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          `;
+          errAlert.classList.remove('d-none');
+        } else {
+          errAlert.className = 'alert alert-danger py-2 px-3 small border-0 mb-3';
+          errText.textContent = err.message || 'Kredensial yang diberikan tidak cocok dengan data kami.';
+          errAlert.classList.remove('d-none');
+        }
       } finally {
         submitBtn.disabled = false;
         spinner.classList.add('d-none');

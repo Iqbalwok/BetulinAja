@@ -15,6 +15,7 @@ class StatusController extends BaseApiController
     {
         $request->validate([
             'availability_status' => ['nullable', 'in:online,offline,busy'],
+            'status' => ['nullable', 'in:online,offline,busy'],
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
         ]);
@@ -26,12 +27,13 @@ class StatusController extends BaseApiController
             return $this->sendError('Profil mitra tidak ditemukan.', null, 404);
         }
 
-        if ($request->filled('availability_status')) {
+        $newStatus = $request->input('availability_status') ?? $request->input('status');
+        if ($newStatus) {
             // Unverified partners cannot go online
-            if ($request->availability_status === 'online' && $profile->verification_status !== 'verified') {
+            if ($newStatus === 'online' && $profile->verification_status !== 'verified') {
                 return $this->sendError('Akun mitra Anda belum diverifikasi admin. Tidak dapat online.', null, 403);
             }
-            $profile->availability_status = $request->availability_status;
+            $profile->availability_status = $newStatus;
         }
 
         if ($request->filled('latitude')) {

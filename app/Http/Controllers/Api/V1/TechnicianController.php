@@ -19,15 +19,44 @@ class TechnicianController extends BaseApiController
             ->whereHas('partnerProfile', function ($q) {
                 $q->where('verification_status', 'verified');
             })
-            ->with(['partnerProfile.skills.category']);
+            ->with(['partnerProfile.skills.category', 'addresses']);
 
-        if ($request->filled('category_id')) {
+        // Search by keyword (name, description, category)
+        if ($request->filled('search')) {
+            $search = '%' . trim($request->search) . '%';
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', $search)
+                  ->orWhereHas('partnerProfile', function ($sub) use ($search) {
+                      $sub->where('description', 'like', $search);
+                  })
+                  ->orWhereHas('partnerProfile.skills.category', function ($sub) use ($search) {
+                      $sub->where('name', 'like', $search);
+                  });
+            });
+        }
+
+        // Category filter (slug or ID)
+        if ($request->filled('category')) {
+            $cat = $request->category;
+            $query->whereHas('partnerProfile.skills.category', function ($q) use ($cat) {
+                $q->where('slug', $cat)->orWhere('id', $cat);
+            });
+        } elseif ($request->filled('category_id')) {
             $catId = $request->category_id;
             $query->whereHas('partnerProfile.skills', function ($q) use ($catId) {
                 $q->where('category_id', $catId);
             });
         }
 
+        // City / Location filter
+        if ($request->filled('city')) {
+            $city = '%' . trim($request->city) . '%';
+            $query->whereHas('addresses', function ($q) use ($city) {
+                $q->where('city', 'like', $city)->orWhere('district', 'like', $city);
+            });
+        }
+
+        // Minimum rating filter
         if ($request->filled('min_rating')) {
             $minRating = (float) $request->min_rating;
             $query->whereHas('partnerProfile', function ($q) use ($minRating) {
@@ -35,6 +64,7 @@ class TechnicianController extends BaseApiController
             });
         }
 
+        // Availability status filter
         if ($request->filled('availability')) {
             $status = $request->availability;
             $query->whereHas('partnerProfile', function ($q) use ($status) {
@@ -42,7 +72,26 @@ class TechnicianController extends BaseApiController
             });
         }
 
-        $technicians = $query->paginate(15);
+        // Sorting options
+        $sort = $request->get('sort', 'rating_desc');
+        if ($sort === 'rating_desc') {
+            $query->join('partner_profiles', 'users.id', '=', 'partner_profiles.user_id')
+                  ->orderByDesc('partner_profiles.average_rating')
+                  ->select('users.*');
+        } elseif ($sort === 'experience_desc') {
+            $query->join('partner_profiles', 'users.id', '=', 'partner_profiles.user_id')
+                  ->orderByDesc('partner_profiles.years_experience')
+                  ->select('users.*');
+        } elseif ($sort === 'jobs_desc') {
+            $query->join('partner_profiles', 'users.id', '=', 'partner_profiles.user_id')
+                  ->orderByDesc('partner_profiles.completed_jobs')
+                  ->select('users.*');
+        } elseif ($sort === 'name_asc') {
+            $query->orderBy('name', 'asc');
+        }
+
+        $perPage = min((int) $request->get('per_page', 50), 100);
+        $technicians = $query->paginate($perPage);
 
         // Calculate distance if customer coords provided
         if ($request->filled('latitude') && $request->filled('longitude')) {
@@ -78,6 +127,7 @@ class TechnicianController extends BaseApiController
             })
             ->with([
                 'partnerProfile.skills.category',
+                'addresses',
                 'ordersAsPartner.review' => function ($q) {
                     $q->where('is_visible', true)->with('customer:id,name');
                 },

@@ -59,6 +59,27 @@ class ServiceCategorySeeder extends Seeder
                 'icon' => 'bi-house-gear',
                 'sort_order' => 7,
             ],
+            [
+                'name' => 'Mesin Cuci',
+                'slug' => 'mesin-cuci',
+                'description' => 'Perbaikan mesin cuci 1 & 2 tabung, front load, pengering rusak, error kode, dan dinamo mati.',
+                'icon' => 'bi-arrow-repeat',
+                'sort_order' => 8,
+            ],
+            [
+                'name' => 'CCTV & Keamanan',
+                'slug' => 'cctv-keamanan',
+                'description' => 'Pemasangan kamera CCTV IP/analog, konfigurasi DVR/NVR online HP, perbaikan kabel putus.',
+                'icon' => 'bi-camera-video',
+                'sort_order' => 9,
+            ],
+            [
+                'name' => 'Jaringan Internet & WiFi',
+                'slug' => 'jaringan-wifi',
+                'description' => 'Setting router WiFi, pasang repeater sinyal, perapihan kabel LAN, dan solusi internet lemot.',
+                'icon' => 'bi-wifi',
+                'sort_order' => 10,
+            ],
         ];
 
         foreach ($categories as $cat) {

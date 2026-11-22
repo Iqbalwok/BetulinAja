@@ -1,7 +1,7 @@
 /**
  * BetulinAja — Technicians Directory & Dynamic Showcase
- * Fetches real verified technicians from Laravel REST API (/api/v1/technicians),
- * handles responsive grid rendering, live search, specialty filtering, and honest metrics.
+ * Fetches real verified technicians from Laravel REST API (/api/v1/technicians?per_page=50),
+ * handles responsive grid rendering, live search, multi-category & city filtering, honest metrics and sorting.
  */
 
 let allTechniciansData = [];
@@ -34,7 +34,7 @@ async function initTechniciansDirectory() {
   `;
 
   try {
-    const res = await ApiClient.get('/technicians');
+    const res = await ApiClient.get('/technicians?per_page=50');
     // Extract array from Laravel pagination or plain data
     const rawData = res.data?.data || res.data || [];
     allTechniciansData = Array.isArray(rawData) ? rawData : [];
@@ -48,38 +48,52 @@ async function initTechniciansDirectory() {
       renderTechniciansList(homepageGrid, allTechniciansData.slice(0, 3));
     }
     if (directoryGrid) {
-      renderTechniciansList(directoryGrid, allTechniciansData);
+      // Check if URL has category filter
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlCat = urlParams.get('category') || urlParams.get('cat');
+      const specFilter = document.getElementById('tech-specialty-filter');
+      if (urlCat && specFilter) {
+        for (let opt of specFilter.options) {
+          if (opt.value.includes(urlCat) || urlCat.includes(opt.value)) {
+            specFilter.value = opt.value;
+            break;
+          }
+        }
+      }
+
       setupFiltersAndSearch();
+      applyAllFilters();
     }
 
   } catch (err) {
     console.warn('Gagal memuat teknisi via API, menampilkan fallback data:', err);
-    // Graceful fallback with valid IDs matching database seeders
     allTechniciansData = [
       {
         id: 3,
-        name: 'Agus Santoso',
+        name: 'Agus "Dingin" Santoso',
+        addresses: [{ city: 'Jakarta Pusat', district: 'Menteng' }],
         partner_profile: {
-          description: 'Teknisi spesialis AC dan instalasi listrik rumah tangga berpengalaman lebih dari 8 tahun.',
+          description: 'Senior AC maintenance technician. Cuci overhaul chemical, ganti kapasitor, flashing pipa freon.',
           availability_status: 'online',
-          average_rating: '4.90',
-          total_reviews: 28,
-          completed_jobs: 42,
-          years_experience: 8,
-          skills: [{ category: { name: 'Service AC' }, experience_years: 8 }]
+          average_rating: '4.94',
+          total_reviews: 155,
+          completed_jobs: 220,
+          years_experience: 10,
+          skills: [{ category: { name: 'Service AC', slug: 'service-ac' }, experience_years: 10 }]
         }
       },
       {
         id: 4,
-        name: 'Bambang Wijaya',
+        name: 'Bambang "Pipa" Wijaya',
+        addresses: [{ city: 'Jakarta Selatan', district: 'Kebayoran Baru' }],
         partner_profile: {
-          description: 'Ahli perpipaan, pompa air, dan saluran mampet. Melayani area Jakarta dan Tangerang.',
+          description: 'Ahli pelancaran saluran air mampet tanpa bongkar pipa, servis pompa air jet pump.',
           availability_status: 'online',
-          average_rating: '4.85',
-          total_reviews: 19,
-          completed_jobs: 31,
-          years_experience: 5,
-          skills: [{ category: { name: 'Plumbing' }, experience_years: 5 }]
+          average_rating: '4.89',
+          total_reviews: 110,
+          completed_jobs: 145,
+          years_experience: 8,
+          skills: [{ category: { name: 'Plumbing & Pipa Air', slug: 'plumbing' }, experience_years: 8 }]
         }
       }
     ];
@@ -87,19 +101,18 @@ async function initTechniciansDirectory() {
       renderTechniciansList(homepageGrid, allTechniciansData.slice(0, 3));
     }
     if (directoryGrid) {
-      renderTechniciansList(directoryGrid, allTechniciansData);
       setupFiltersAndSearch();
+      applyAllFilters();
     }
   }
 }
 
 function renderTechniciansList(container, techs) {
-  if (techs.length === 0) {
-    renderEmptyTechnicians(container, 'Tidak ada teknisi yang cocok dengan kriteria pencarian Anda.');
+  if (!techs || techs.length === 0) {
+    renderEmptyTechnicians(container, 'Tidak ada teknisi yang cocok dengan kriteria filter Anda.');
     return;
   }
 
-  // Ensure container uses responsive grid classes
   container.className = 'technician-grid';
 
   container.innerHTML = techs.map(t => {
@@ -118,6 +131,13 @@ function renderTechniciansList(container, techs) {
     } else if (p.description) {
       specialty = p.description.split('.')[0];
       if (specialty.length > 45) specialty = specialty.substring(0, 42) + '...';
+    }
+
+    // City & District display
+    let locationText = 'Jabodetabek';
+    if (t.addresses && t.addresses.length > 0) {
+      const addr = t.addresses[0];
+      locationText = `${addr.city || 'Jabodetabek'}${addr.district ? ` (${addr.district})` : ''}`;
     }
 
     const ratingVal = Number(p.average_rating || 5.0).toFixed(1);
@@ -141,7 +161,7 @@ function renderTechniciansList(container, techs) {
       <div class="technician-card">
         <div>
           <!-- Header: Photo & Name -->
-          <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="d-flex align-items-center gap-3 mb-2">
             <div class="position-relative flex-shrink-0">
               <div class="tech-avatar-wrapper bg-primary-subtle text-primary">
                 ${p.photo ? `<img src="${p.photo}" alt="${t.name}" class="tech-avatar-img">` : initials}
@@ -161,6 +181,13 @@ function renderTechniciansList(container, techs) {
                 <span class="text-muted" style="font-size: 0.75rem;">${reviewsCount > 0 ? `(${reviewsCount} ulasan)` : '(Terverifikasi)'}</span>
               </div>
             </div>
+          </div>
+
+          <!-- Location Badge -->
+          <div class="mb-2">
+            <span class="badge bg-light text-secondary border small px-2 py-1 text-truncate d-inline-block" style="max-width: 100%; font-size: 0.75rem;">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i>${locationText}
+            </span>
           </div>
 
           <!-- Honest Metrics Bar -->
@@ -208,57 +235,107 @@ function renderEmptyTechnicians(container, msg) {
   `;
 }
 
-function setupFiltersAndSearch() {
+function applyAllFilters() {
   const searchInput = document.getElementById('tech-search-input');
   const specialtyFilter = document.getElementById('tech-specialty-filter');
+  const cityFilter = document.getElementById('tech-city-filter');
   const ratingFilter = document.getElementById('tech-rating-filter');
+  const sortFilter = document.getElementById('tech-sort-filter');
   const gridEl = document.getElementById('tech-grid');
 
   if (!gridEl) return;
 
-  function filterData() {
-    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-    const spec = specialtyFilter ? specialtyFilter.value.toLowerCase() : 'all';
-    const minRating = ratingFilter ? (ratingFilter.value === 'all' ? 0 : parseFloat(ratingFilter.value)) : 0;
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  const spec = specialtyFilter ? specialtyFilter.value.toLowerCase() : 'all';
+  const city = cityFilter ? cityFilter.value.toLowerCase() : 'all';
+  const minRating = ratingFilter ? (ratingFilter.value === 'all' ? 0 : parseFloat(ratingFilter.value)) : 0;
+  const sortVal = sortFilter ? sortFilter.value : 'rating_desc';
 
-    const filtered = allTechniciansData.filter(t => {
-      const p = t.partner_profile || {};
-      const nameMatch = t.name.toLowerCase().includes(query);
-      const descMatch = (p.description || '').toLowerCase().includes(query);
-      const skillsText = (p.skills || []).map(s => s.category?.name || '').join(' ').toLowerCase();
-      const textMatch = !query || nameMatch || descMatch || skillsText.includes(query);
+  let filtered = allTechniciansData.filter(t => {
+    const p = t.partner_profile || {};
+    const nameMatch = (t.name || '').toLowerCase().includes(query);
+    const descMatch = (p.description || '').toLowerCase().includes(query);
+    const skillsText = (p.skills || []).map(s => s.category?.name || '').join(' ').toLowerCase();
+    
+    // Address location text
+    const addr = (t.addresses && t.addresses[0]) ? t.addresses[0] : {};
+    const cityText = `${addr.city || ''} ${addr.district || ''}`.toLowerCase();
+    const locMatch = cityText.includes(query);
 
-      let specMatch = true;
-      if (spec !== 'all') {
-        const hasSkill = (p.skills || []).some(s => (s.category?.slug || s.category?.name || '').toLowerCase().includes(spec));
-        const hasInDesc = (p.description || '').toLowerCase().includes(spec);
-        specMatch = hasSkill || hasInDesc;
-      }
+    const textMatch = !query || nameMatch || descMatch || skillsText.includes(query) || locMatch;
 
-      const ratingMatch = Number(p.average_rating || 5.0) >= minRating;
+    // Category / Specialty match
+    let specMatch = true;
+    if (spec !== 'all') {
+      const hasSkill = (p.skills || []).some(s => {
+        const catSlug = (s.category?.slug || '').toLowerCase();
+        const catName = (s.category?.name || '').toLowerCase();
+        return catSlug.includes(spec) || spec.includes(catSlug) || catName.includes(spec);
+      });
+      const hasInDesc = (p.description || '').toLowerCase().includes(spec);
+      specMatch = hasSkill || hasInDesc;
+    }
 
-      return textMatch && specMatch && ratingMatch;
-    });
+    // City filter match
+    let cityMatch = true;
+    if (city !== 'all') {
+      cityMatch = cityText.includes(city) || (p.description || '').toLowerCase().includes(city);
+    }
 
-    renderTechniciansList(gridEl, filtered);
-  }
+    // Rating match
+    const ratingMatch = Number(p.average_rating || 5.0) >= minRating;
 
-  if (searchInput) searchInput.addEventListener('input', filterData);
-  if (specialtyFilter) specialtyFilter.addEventListener('change', filterData);
-  if (ratingFilter) ratingFilter.addEventListener('change', filterData);
+    return textMatch && specMatch && cityMatch && ratingMatch;
+  });
+
+  // Sorting
+  filtered.sort((a, b) => {
+    const pa = a.partner_profile || {};
+    const pb = b.partner_profile || {};
+
+    if (sortVal === 'rating_desc') {
+      return Number(pb.average_rating || 0) - Number(pa.average_rating || 0);
+    } else if (sortVal === 'jobs_desc') {
+      return Number(pb.completed_jobs || 0) - Number(pa.completed_jobs || 0);
+    } else if (sortVal === 'experience_desc') {
+      return Number(pb.years_experience || 0) - Number(pa.years_experience || 0);
+    } else if (sortVal === 'name_asc') {
+      return (a.name || '').localeCompare(b.name || '');
+    }
+    return 0;
+  });
+
+  renderTechniciansList(gridEl, filtered);
+}
+
+function setupFiltersAndSearch() {
+  const searchInput = document.getElementById('tech-search-input');
+  const specialtyFilter = document.getElementById('tech-specialty-filter');
+  const cityFilter = document.getElementById('tech-city-filter');
+  const ratingFilter = document.getElementById('tech-rating-filter');
+  const sortFilter = document.getElementById('tech-sort-filter');
+
+  if (searchInput) searchInput.addEventListener('input', applyAllFilters);
+  if (specialtyFilter) specialtyFilter.addEventListener('change', applyAllFilters);
+  if (cityFilter) cityFilter.addEventListener('change', applyAllFilters);
+  if (ratingFilter) ratingFilter.addEventListener('change', applyAllFilters);
+  if (sortFilter) sortFilter.addEventListener('change', applyAllFilters);
 }
 
 function resetTechnicianFilters() {
   const searchInput = document.getElementById('tech-search-input');
   const specialtyFilter = document.getElementById('tech-specialty-filter');
+  const cityFilter = document.getElementById('tech-city-filter');
   const ratingFilter = document.getElementById('tech-rating-filter');
+  const sortFilter = document.getElementById('tech-sort-filter');
 
   if (searchInput) searchInput.value = '';
   if (specialtyFilter) specialtyFilter.selectedIndex = 0;
+  if (cityFilter) cityFilter.selectedIndex = 0;
   if (ratingFilter) ratingFilter.selectedIndex = 0;
+  if (sortFilter) sortFilter.selectedIndex = 0;
 
-  const gridEl = document.getElementById('tech-grid') || document.getElementById('homepage-technicians-grid');
-  if (gridEl) renderTechniciansList(gridEl, allTechniciansData);
+  applyAllFilters();
 }
 
 // Global booking forwarder with Auth check

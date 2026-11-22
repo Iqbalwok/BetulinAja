@@ -19,6 +19,9 @@ class UpdateProfileRequest extends FormRequest
             'name' => ['sometimes', 'string', 'max:255'],
             'email' => ['sometimes', 'email', 'max:255', "unique:users,email,{$userId}"],
             'phone' => ['sometimes', 'string', 'max:20', "unique:users,phone,{$userId}"],
+            'address' => ['nullable', 'string', 'max:500'],
+            'city' => ['nullable', 'string', 'max:100'],
+            'district' => ['nullable', 'string', 'max:100'],
             'current_password' => ['required_with:new_password', 'string'],
             'new_password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ];

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             PricingRuleSeeder::class,
             DemoUserSeeder::class,
+            SampleTechniciansSeeder::class,
             DemoOrderSeeder::class,
         ]);
     }

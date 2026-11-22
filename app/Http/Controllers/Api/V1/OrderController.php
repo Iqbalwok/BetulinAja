@@ -47,6 +47,15 @@ class OrderController extends BaseApiController
     public function store(CreateOrderRequest $request): JsonResponse
     {
         $customer = $request->user();
+
+        $emailVerificationRequired = config('auth.email_verification_required', false);
+        if ($emailVerificationRequired && $customer->role === 'customer' && is_null($customer->email_verified_at)) {
+            return $this->sendError('Email Anda belum diverifikasi. Silakan lakukan verifikasi OTP email untuk membuat pesanan.', [
+                'needs_verification' => true,
+                'email' => $customer->email,
+            ], 403);
+        }
+
         $service = Service::with('pricingRule')->findOrFail($request->service_id);
 
         // Determine coordinates and address text

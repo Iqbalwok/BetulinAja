@@ -265,7 +265,7 @@ async function loadAvailableTechnicians() {
   const preselectedTechId = urlParams.get('tech_id');
 
   try {
-    const res = await ApiClient.get('/technicians');
+    const res = await ApiClient.get('/technicians?per_page=50');
     const rawData = res.data?.data || res.data || [];
     const techs = Array.isArray(rawData) ? rawData : [];
 
@@ -426,6 +426,16 @@ async function submitRealOrder() {
     ApiClient.showToast('Perlu Masuk', 'Silakan masuk atau buat akun untuk menyimpan pesanan Anda.', 'warning');
     setTimeout(() => {
       window.location.href = `login.html?returnUrl=${encodeURIComponent(window.location.pathname)}`;
+    }, 1500);
+    return;
+  }
+
+  // Check email verification status
+  const currentUser = Auth.getUser();
+  if (currentUser && !currentUser.email_verified_at && currentUser.role === 'customer') {
+    ApiClient.showToast('Verifikasi Diperlukan', 'Email Anda belum diverifikasi. Silakan lakukan verifikasi OTP terlebih dahulu.', 'warning');
+    setTimeout(() => {
+      window.location.href = `verify-email.html?email=${encodeURIComponent(currentUser.email)}`;
     }, 1500);
     return;
   }

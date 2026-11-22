@@ -12,6 +12,14 @@
       "dest": "/register.html"
     },
     {
+      "src": "/verify-email",
+      "dest": "/verify-email.html"
+    },
+    {
+      "src": "/forgot-password",
+      "dest": "/forgot-password.html"
+    },
+    {
       "src": "/services",
       "dest": "/services.html"
     },

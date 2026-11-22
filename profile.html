@@ -253,33 +253,32 @@
 
 <div class="container py-5">
   <div class="row g-4">
-    <!-- Profile Sidebar -->
+        <!-- Profile Sidebar -->
     <div class="col-lg-4">
       <div class="card card-custom p-4 text-center mb-4">
         <div class="position-relative d-inline-block mx-auto mb-3">
-          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" alt="Ahmad Fauzi" class="rounded-circle object-fit-cover shadow-sm" style="width: 90px; height: 90px; border: 3px solid var(--primary-light);">
-          <button type="button" class="btn btn-primary-custom btn-sm rounded-circle position-absolute bottom-0 end-0 p-1" style="width: 28px; height: 28px;" title="Ubah Foto">
-            <i class="bi bi-camera-fill" style="font-size: 0.75rem;"></i>
-          </button>
+          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm mx-auto user-avatar-display" style="width: 80px; height: 80px; font-size: 1.8rem;">
+            BA
+          </div>
         </div>
-        <h5 class="fw-bold text-dark mb-1">Ahmad Fauzi</h5>
-        <span class="text-secondary small d-block mb-3">Pelanggan Setia &bull; Bergabung sejak Jan 2025</span>
+        <h5 class="fw-bold text-dark mb-1 user-name-display">Memuat Pengguna...</h5>
+        <span class="text-secondary small d-block mb-3 user-email-display">email@betulinaja.id</span>
         <div class="badge-soft-success py-1 px-3 small d-inline-flex align-items-center gap-1">
-          <i class="bi bi-shield-check"></i> Akun Terverifikasi
+          <i class="bi bi-shield-check"></i> Akun Pelanggan Aktif
         </div>
 
         <div class="pt-4 border-top mt-4 text-start">
           <div class="d-flex justify-content-between py-2 border-bottom small">
-            <span class="text-secondary">Total Pesanan</span>
-            <span class="fw-bold text-dark">4 Transaksi</span>
+            <span class="text-secondary">Status Cloud</span>
+            <span class="fw-bold text-success"><i class="bi bi-cloud-check-fill me-1"></i>Railway MySQL</span>
           </div>
           <div class="d-flex justify-content-between py-2 border-bottom small">
-            <span class="text-secondary">Poin Reward</span>
-            <span class="fw-bold text-primary">150 Poin</span>
+            <span class="text-secondary">Keamanan Akun</span>
+            <span class="fw-bold text-primary">Sanctum Token</span>
           </div>
           <div class="d-flex justify-content-between py-2 small">
-            <span class="text-secondary">Garansi Aktif</span>
-            <span class="badge-soft-primary small">1 Layanan</span>
+            <span class="text-secondary">Garansi Resmi</span>
+            <span class="badge-soft-primary small">30 Hari</span>
           </div>
         </div>
       </div>
@@ -287,28 +286,73 @@
 
     <!-- Profile Main Form -->
     <div class="col-lg-8">
+      <!-- Personal Info & Address Card -->
       <div class="card card-custom p-4 p-md-5 mb-4">
-        <h5 class="fw-bold text-dark mb-4 pb-2 border-bottom">Informasi Pribadi</h5>
+        <h5 class="fw-bold text-dark mb-4 pb-2 border-bottom d-flex align-items-center gap-2">
+          <i class="bi bi-person-gear text-primary"></i> Data Diri & Alamat Utama
+        </h5>
 
-        <form onsubmit="event.preventDefault(); BetulinAja.showToast('Profil Disimpan', 'Data profil Anda telah berhasil diperbarui.', 'success');">
+        <form id="profile-info-form">
           <div class="row g-3">
             <div class="col-sm-6">
-              <label class="form-label">Nama Lengkap</label>
-              <input type="text" class="form-control" value="Ahmad Fauzi" required>
+              <label class="form-label fw-semibold text-dark small">Nama Lengkap</label>
+              <input type="text" id="profile-name" class="form-control" placeholder="Nama lengkap Anda" required>
             </div>
             <div class="col-sm-6">
-              <label class="form-label">Nomor WhatsApp / HP</label>
-              <input type="tel" class="form-control" value="081298765432" required>
+              <label class="form-label fw-semibold text-dark small">Nomor WhatsApp / HP</label>
+              <input type="tel" id="profile-phone" class="form-control" placeholder="Contoh: 081234567890" required>
             </div>
             <div class="col-12">
-              <label class="form-label">Alamat Email</label>
-              <input type="email" class="form-control" value="ahmad.fauzi@example.com" required>
+              <label class="form-label fw-semibold text-dark small">Alamat Email</label>
+              <input type="email" id="profile-email" class="form-control" placeholder="alamat@email.com" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold text-dark small">Alamat Rumah Utama (Untuk Pemesanan Jasa)</label>
+              <textarea id="profile-address" class="form-control" rows="2" placeholder="Nama jalan, nomor rumah, RT/RW, dan patokan..."></textarea>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold text-dark small">Kota / Kabupaten</label>
+              <input type="text" id="profile-city" class="form-control" placeholder="Contoh: Tangerang, Jakarta Selatan, dll.">
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold text-dark small">Kecamatan</label>
+              <input type="text" id="profile-district" class="form-control" placeholder="Contoh: Cipondoh, Kebayoran Baru, dll.">
             </div>
           </div>
 
           <div class="mt-4 pt-3 border-top d-flex justify-content-end">
             <button type="submit" class="btn btn-primary-custom px-4">
-              <i class="bi bi-check2 me-1"></i> Simpan Perubahan
+              <i class="bi bi-check2 me-1"></i> Simpan Data & Alamat
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Change Password Card -->
+      <div class="card card-custom p-4 p-md-5 mb-4">
+        <h5 class="fw-bold text-dark mb-4 pb-2 border-bottom d-flex align-items-center gap-2">
+          <i class="bi bi-shield-lock text-primary"></i> Ubah Kata Sandi Akun
+        </h5>
+
+        <form id="profile-password-form">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label fw-semibold text-dark small">Kata Sandi Saat Ini</label>
+              <input type="password" id="profile-current-password" class="form-control" placeholder="Masukkan password saat ini" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold text-dark small">Kata Sandi Baru</label>
+              <input type="password" id="profile-new-password" class="form-control" placeholder="Minimal 8 karakter" minlength="8" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold text-dark small">Konfirmasi Kata Sandi Baru</label>
+              <input type="password" id="profile-confirm-password" class="form-control" placeholder="Ulangi password baru" minlength="8" required>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-top d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-custom px-4">
+              <i class="bi bi-key me-1"></i> Perbarui Kata Sandi
             </button>
           </div>
         </form>
@@ -317,30 +361,20 @@
       <!-- Saved Addresses -->
       <div class="card card-custom p-4 p-md-5">
         <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
-          <h5 class="fw-bold text-dark mb-0">Daftar Alamat Tersimpan</h5>
-          <button type="button" class="btn btn-sm btn-outline-custom" onclick="BetulinAja.showToast('Tambah Alamat', 'Membuka form penambahan alamat baru...', 'info')">
-            <i class="bi bi-plus-lg me-1"></i> Tambah Alamat
-          </button>
+          <h5 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+            <i class="bi bi-geo-alt text-primary"></i> Daftar Alamat Tersimpan
+          </h5>
         </div>
 
-        <div class="border rounded-3 p-3 mb-3 bg-light position-relative">
-          <div class="d-flex align-items-center gap-2 mb-1">
-            <h6 class="fw-bold text-dark mb-0">Rumah Utama</h6>
-            <span class="badge-soft-primary small py-0 px-2" style="font-size: 0.7rem;">Utama</span>
+        <div id="saved-addresses-container">
+          <div class="text-center py-3">
+            <div class="spinner-border spinner-border-sm text-primary"></div>
+            <span class="small text-muted ms-2">Memuat alamat tersimpan...</span>
           </div>
-          <p class="text-secondary small mb-1">Jl. Sudirman No. 45, RT 02/RW 04, Kebayoran Baru, Jakarta Selatan</p>
-          <span class="text-muted small"><i class="bi bi-pin-map me-1 text-danger"></i>Patokan: Pagar hitam samping Alfamart</span>
-        </div>
-
-        <div class="border rounded-3 p-3">
-          <div class="d-flex align-items-center gap-2 mb-1">
-            <h6 class="fw-bold text-dark mb-0">Kantor Studio</h6>
-          </div>
-          <p class="text-secondary small mb-1">Jl. Gatot Subroto Kav. 18, Lantai 4, Kuningan Barat, Jakarta Selatan</p>
-          <span class="text-muted small"><i class="bi bi-pin-map me-1 text-danger"></i>Patokan: Lobby Gedung B</span>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
   </main>
@@ -456,6 +490,7 @@
 
   <!-- Global App JS -->
   <script src="assets/js/app.js"></script>
+  <script src="js/profile.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
       if (!Auth.requireAuth()) return;

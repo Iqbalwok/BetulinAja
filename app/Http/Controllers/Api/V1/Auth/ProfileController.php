@@ -53,6 +53,24 @@ class ProfileController extends BaseApiController
         $user->fill($request->only(['name', 'email', 'phone']));
         $user->save();
 
+        if ($request->filled('address')) {
+            $user->addresses()->updateOrCreate(
+                ['is_primary' => true],
+                [
+                    'label' => 'Rumah',
+                    'address' => $request->address,
+                    'city' => $request->input('city', 'Tangerang'),
+                    'district' => $request->input('district', 'Karawaci'),
+                ]
+            );
+        }
+
+        if ($user->isCustomer()) {
+            $user->load('addresses');
+        } elseif ($user->isPartner()) {
+            $user->load('partnerProfile.skills.category');
+        }
+
         return $this->sendSuccess($user, 'Profil berhasil diperbarui.');
     }
 }
