@@ -40,6 +40,57 @@ use App\Http\Controllers\Api\V1\Admin\ReportController as AdminReportController;
 Route::prefix('v1')->group(function () {
 
     // ==========================================
+    // System Health & Monitoring Endpoint
+    // ==========================================
+    Route::get('/health', function () {
+        $dbConnected = false;
+        $counts = [];
+        try {
+            \Illuminate\Support\Facades\DB::connection()->getPdo();
+            $dbConnected = true;
+            $counts = [
+                'users' => \App\Models\User::count(),
+                'categories' => \App\Models\ServiceCategory::count(),
+                'services' => \App\Models\Service::count(),
+                'orders' => \App\Models\Order::count(),
+            ];
+        } catch (\Throwable $e) {
+            $dbConnected = false;
+        }
+
+        return response()->json([
+            'status' => 'healthy',
+            'database_connected' => $dbConnected,
+            'counts' => $counts,
+            'timestamp' => now()->toIso8601String(),
+        ]);
+    });
+
+    Route::match(['get', 'post'], '/system/seed', function (\Illuminate\Http\Request $request) {
+        if ($request->query('token') !== 'betulinaja2026' && $request->header('X-Seed-Token') !== 'betulinaja2026') {
+            return response()->json(['success' => false, 'message' => 'Unauthorized seed token.'], 403);
+        }
+
+        \Illuminate\Support\Facades\Artisan::call('db:seed', [
+            '--class' => 'Database\\Seeders\\DatabaseSeeder',
+            '--force' => true,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Database cloud successfully seeded!',
+            'counts' => [
+                'users' => \App\Models\User::count(),
+                'categories' => \App\Models\ServiceCategory::count(),
+                'services' => \App\Models\Service::count(),
+                'technicians' => \App\Models\PartnerProfile::count(),
+                'orders' => \App\Models\Order::count(),
+            ],
+            'output' => \Illuminate\Support\Facades\Artisan::output(),
+        ]);
+    });
+
+    // ==========================================
     // Public Endpoints
     // ==========================================
     Route::middleware('throttle:auth')->group(function () {
