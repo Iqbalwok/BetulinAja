@@ -11,6 +11,15 @@ class RegisterRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if (!$this->has('password_confirmation') && $this->has('password')) {
+            $this->merge([
+                'password_confirmation' => $this->password,
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         return [
